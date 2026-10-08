@@ -84,6 +84,10 @@ input:focus,textarea:focus{border-color:var(--ac);box-shadow:0 0 0 4px rgba(79,7
 .rec b{display:block;font-size:16px}
 .rec small{display:block;color:var(--muted);font-size:13.5px}
 .rec.on{border-color:var(--err);background:#fef2f2}
+.rec .info{min-width:0}
+.rec small.quiet{color:var(--err);font-weight:600}
+.rec .bars{display:flex;align-items:center;gap:2px;height:30px;margin-left:auto;flex:none}
+.rec .bars i{display:block;width:3px;border-radius:2px;background:var(--err);transition:height .08s linear}
 .rec .dot{width:46px;height:46px;border-radius:50%;background:var(--err);flex:none;animation:pulse 1.2s ease-in-out infinite}
 .rec .time{font-size:22px;font-weight:700;font-variant-numeric:tabular-nums}
 @keyframes pulse{0%,100%{transform:scale(.8);opacity:1}50%{transform:scale(1);opacity:.6}}
@@ -214,7 +218,7 @@ var T = {
     filesL: 'Fotografije ali video (neobvezno)', filesHint: 'Če kaj pomaga razumeti: fotografija, posnetek zaslona, kratek video. Naložijo se, ko pošljete odgovore.',
     voice: 'Glasovno sporočilo', voiceS: 'posnemite ali izberite posnetek',
     recBig: 'Raje povejte? Posnemite glasovno sporočilo', recTap: 'Tapnite za začetek snemanja',
-    recOn: 'Snemam … tapnite za konec', recName: 'glasovno-sporocilo', recFail: 'Snemanje tukaj ne deluje. Nič hudega:', recVideo: '🎥 Posnemite kratek video (kar govorite)', recPhone: '🎙️ Odprite snemalnik telefona', recType: 'Ali pa na kratko napišite spodaj.', recApp: 'Namig: če stran odprete v Safariju ali Chromu (meni ⋯ → Odpri v brskalniku), lahko snemate kar tukaj.',
+    recOn: 'Snemam … tapnite za konec', recQuiet: 'Ne slišim vas: govorite bližje mikrofonu', recSilent: 'Posnetek je tih, nisem slišal ničesar. Morda je izbran napačen mikrofon. Poskusite znova ali na kratko napišite spodaj.', recName: 'glasovno-sporocilo', recFail: 'Snemanje tukaj ne deluje. Nič hudega:', recVideo: '🎥 Posnemite kratek video (kar govorite)', recPhone: '🎙️ Odprite snemalnik telefona', recType: 'Ali pa na kratko napišite spodaj.', recApp: 'Namig: če stran odprete v Safariju ali Chromu (meni ⋯ → Odpri v brskalniku), lahko snemate kar tukaj.',
     reqOrVoice: 'Napišite nekaj besed ali posnemite glasovno sporočilo.', voiceOnly: '[glasovno sporočilo]',
     drop: 'Dodajte datoteke', dropS: 'do {N} datotek, vsaka do {MB} MB',
     keepOpen: 'Med nalaganjem ne zaklepajte zaslona in ne zapirajte strani.',
@@ -274,7 +278,7 @@ var T = {
     filesL: 'Photos or video (optional)', filesHint: 'Anything that helps explain it: a photo, a screenshot, a short video. They upload when you send your answers.',
     voice: 'Voice message', voiceS: 'record or pick a recording',
     recBig: 'Rather say it? Record a voice message', recTap: 'Tap to start recording',
-    recOn: 'Recording … tap to stop', recName: 'voice-message', recFail: "Recording doesn't work here. No problem:", recVideo: '🎥 Record a short video instead (just talk)', recPhone: "🎙️ Open your phone's recorder", recType: 'Or just type a few lines below.', recApp: 'Tip: open this page in Safari or Chrome (menu ⋯ → Open in browser) to record right here.',
+    recOn: 'Recording … tap to stop', recQuiet: "I can't hear you: speak closer to the microphone", recSilent: 'This recording is silent, I heard nothing. Maybe the wrong microphone is in use. Try again, or just type a few lines below.', recName: 'voice-message', recFail: "Recording doesn't work here. No problem:", recVideo: '🎥 Record a short video instead (just talk)', recPhone: "🎙️ Open your phone's recorder", recType: 'Or just type a few lines below.', recApp: 'Tip: open this page in Safari or Chrome (menu ⋯ → Open in browser) to record right here.',
     reqOrVoice: 'Write a few words or record a voice message.', voiceOnly: '[voice message]',
     drop: 'Add files', dropS: 'up to {N} files, {MB} MB each',
     keepOpen: "Please keep the screen on and this page open while uploading.",
@@ -391,8 +395,19 @@ var UA = navigator.userAgent, IOS = /iPad|iPhone|iPod/.test(UA) || (navigator.pl
 var PHONE = IOS || /Android/i.test(UA);
 var IN_APP = /FBAN|FBAV|Instagram|Line\/|Viber|WhatsApp|LinkedInApp|GSA\/|; wv\)/.test(UA);   // an app's built-in browser: often no microphone
 function fmtT(ms) { var sec = Math.floor(ms / 1000); return Math.floor(sec / 60) + ':' + ('0' + sec % 60).slice(-2); }
+// Live level bars while recording (like WhatsApp): people see the page hears them. Flat bars for 3 s = a hint,
+// a silent recording = a warning, so a muted or wrong microphone is noticed before they send.
+var BARS = 24, QUIET = 0.008;
+function barsHtml(levels) {
+  var h = '';
+  for (var i = 0; i < BARS; i++) { var v = levels[levels.length - BARS + i] || 0; h += '<i style="height:' + Math.max(3, Math.round(v * 28)) + 'px"></i>'; }
+  return h;
+}
+function recQuiet(st) { return st && st.measured > 30 && st.peak < QUIET; }
 function recInner() {
-  if (recState) return '<span class="dot" aria-hidden="true"></span><span><span class="time">' + fmtT(Date.now() - recState.t0) + '</span><small>' + esc(t('recOn')) + '</small></span>';
+  if (recState) return '<span class="dot" aria-hidden="true"></span><span class="info"><span class="time">' + fmtT(Date.now() - recState.t0) + '</span><small' +
+    (recQuiet(recState) ? ' class="quiet">' + esc(t('recQuiet')) : '>' + esc(t('recOn'))) + '</small></span>' +
+    (recState.measured ? '<span class="bars" id="recbars" aria-hidden="true">' + barsHtml(recState.levels) + '</span>' : '');
   return '<span class="mic" aria-hidden="true">🎙️</span><span><b>' + esc(t('recBig')) + '</b><small>' + esc(t('recTap')) + '</small></span>';
 }
 function recorderBox() {
@@ -403,15 +418,34 @@ function recUI() { var b = document.getElementById('rec'); if (b) { b.innerHTML 
 async function toggleRecord() {
   if (recState) return stopRecord();
   if (!canMic()) return recFallback();
+  // The level meter's audio engine is created right at the tap: Safari only lets a page use audio from a real tap.
+  var ac = null;
+  try { ac = new (window.AudioContext || window.webkitAudioContext)(); if (ac.resume) ac.resume(); } catch (e) { ac = null; }
   var stream;
   try { stream = await navigator.mediaDevices.getUserMedia({ audio: true }); }
-  catch (e) { return recFallback(); }   // refused, or the browser (an app's built-in one) has no microphone
+  catch (e) { try { if (ac) ac.close(); } catch (e2) {} return recFallback(); }   // refused, or the browser (an app's built-in one) has no microphone
   var types = ['audio/webm;codecs=opus', 'audio/mp4', 'audio/webm', 'audio/ogg'];
   var mime = types.filter(function (m) { return window.MediaRecorder.isTypeSupported && MediaRecorder.isTypeSupported(m); })[0];
   var rec = mime ? new MediaRecorder(stream, { mimeType: mime }) : new MediaRecorder(stream), chunks = [];
   rec.ondataavailable = function (e) { if (e.data && e.data.size) chunks.push(e.data); };
   recState = { rec: rec, stream: stream, chunks: chunks, t0: Date.now() };
   recState.timer = setInterval(function () { recUI(); if (recState && Date.now() - recState.t0 > 10 * 60 * 1000) stopRecord(); }, 500);
+  if (ac) try {   // level meter; if the browser can't, recording still works (just without bars)
+    var an = ac.createAnalyser(), buf = new Uint8Array(1024);
+    an.fftSize = 1024;
+    ac.createMediaStreamSource(stream).connect(an);
+    var st = recState;
+    st.ac = ac; st.levels = []; st.peak = 0; st.measured = 0;
+    st.meter = setInterval(function () {
+      if (ac.state !== 'running') { if (ac.resume) ac.resume(); return; }   // not measuring = no bars, never judged silent
+      an.getByteTimeDomainData(buf);
+      var s = 0; for (var i = 0; i < buf.length; i++) { var x = (buf[i] - 128) / 128; s += x * x; }
+      var rms = Math.sqrt(s / buf.length);
+      st.levels.push(Math.min(1, rms * 6)); if (st.levels.length > BARS) st.levels.shift();
+      st.measured++; if (rms > st.peak) st.peak = rms;
+      var el = document.getElementById('recbars'); if (el) el.innerHTML = barsHtml(st.levels);
+    }, 90);
+  } catch (e) {}
   rec.start(1000);
   recUI();
 }
@@ -430,8 +464,11 @@ function stopRecord() {
   var st = recState; if (!st) return Promise.resolve();
   return new Promise(function (done) {
     st.rec.onstop = function () {
-      clearInterval(st.timer);
+      clearInterval(st.timer); clearInterval(st.meter);
+      try { if (st.ac) st.ac.close(); } catch (e) {}
       st.stream.getTracks().forEach(function (tr) { tr.stop(); });
+      var re = document.getElementById('recerr');
+      if (re) re.innerHTML = recQuiet(st) ? '<div class="warn" role="alert">' + esc(t('recSilent')) + '</div>' : '';
       var type = (st.rec.mimeType || 'audio/webm').split(';')[0];
       var ext = /mp4/.test(type) ? 'm4a' : /ogg/.test(type) ? 'ogg' : 'webm';
       var blob = new Blob(st.chunks, { type: type });
@@ -1005,6 +1042,8 @@ if (DEMO && location.hash === '#selftest') (async function () {
   await until(function () { return !!recState; });
   await wait(1500);
   var timerShown = /0:0[1-9]/.test(document.getElementById('rec').textContent);
+  var barsMove = !!document.querySelector('#recbars i') && recState.peak > QUIET &&
+    [].some.call(document.querySelectorAll('#recbars i'), function (b) { return parseInt(b.style.height, 10) > 3; });
   document.getElementById('rec').click();
   await until(function () { return !recState && files.length === 1; });
   var vf = files[0] || {};
@@ -1012,6 +1051,20 @@ if (DEMO && location.hash === '#selftest') (async function () {
   go(1);                                                                   // no text written: the voice message is enough
   var voiceOk = canRec && timerShown && /^(glasovno-sporocilo|voice-message)-1-0m0[1-9]s\.(webm|m4a|ogg)$/.test(vf.name) && vf.size > 0 && played && flow()[step] === 'time' && payload().steps === t('voiceOnly');
   out.push('voiceRecord=' + voiceOk);
+  out.push('voiceBars=' + (barsMove && !document.querySelector('#recerr .warn')));
+  // A muted / wrong microphone gives silence: the page says so (bars stay flat, warning after the recording).
+  reset(); await dropAllFiles(); a.path = 'fix'; step = 2; render();
+  var gum0 = navigator.mediaDevices.getUserMedia, sctx = new (window.AudioContext || window.webkitAudioContext)();
+  navigator.mediaDevices.getUserMedia = function () { return Promise.resolve(sctx.createMediaStreamDestination().stream); };
+  document.getElementById('rec').click();
+  await until(function () { return !!recState; });
+  await wait(3600);
+  var quietHint = /quiet/.test(document.getElementById('rec').innerHTML);
+  document.getElementById('rec').click();
+  await until(function () { return !recState; });
+  navigator.mediaDevices.getUserMedia = gum0; sctx.close();
+  var sw = document.querySelector('#recerr .warn');
+  out.push('voiceSilent=' + (quietHint && !!sw && sw.textContent === t('recSilent')));
   // Microphone refused (or an app's built-in browser without one): a fallback to tap, never settings instructions.
   reset(); await dropAllFiles(); a.path = 'fix'; step = 2; render();
   var gum = navigator.mediaDevices.getUserMedia;
