@@ -1,0 +1,1087 @@
+<!doctype html>
+<html lang="sl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jan L. · Katero delo vam ali vaši ekipi vsak teden pobere ure?</title>
+<base target="_top">
+<meta name="robots" content="noindex">
+<meta name="description" content="Opišite ali posnemite v 8 minutah. Odgovorim v 7 dneh, brezplačno in brez obveznosti.">
+<meta name="theme-color" content="#4f46e5">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Ccircle%20cx%3D%2232%22%20cy%3D%2232%22%20r%3D%2232%22%20fill%3D%22%234f46e5%22%2F%3E%3Ctext%20x%3D%2232%22%20y%3D%2243%22%20font-size%3D%2232%22%20font-family%3D%22Arial%22%20font-weight%3D%22700%22%20fill%3D%22%23fff%22%20text-anchor%3D%22middle%22%3EJ%3C%2Ftext%3E%3C%2Fsvg%3E">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Jan L. · Katero delo vam ali vaši ekipi vsak teden pobere ure?">
+<meta property="og:description" content="Opišite ali posnemite v 8 minutah. Odgovorim v 7 dneh, brezplačno in brez obveznosti.">
+<meta property="og:url" content="https://automate-and-improve.github.io/">
+<meta property="og:image" content="https://automate-and-improve.github.io/preview.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+
+<!-- The intake page. In Google Apps Script it is served by Code.gs (doGet).
+     Opened directly from disk it runs as a DEMO: nothing is sent, a fake server answers. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--ac:#4f46e5;--ac2:#7c3aed;--acbg:#eef2ff;--ink:#111827;--muted:#6b7280;--line:#e5e7eb;--bg:#f7f7fb;--err:#dc2626;--ok:#059669}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--ink);background:var(--bg);
+  background-image:radial-gradient(900px 400px at 10% -10%,#e0e7ff 0,transparent 60%),radial-gradient(700px 400px at 110% 0,#f3e8ff 0,transparent 55%);
+  min-height:100vh;font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased}
+.demo{background:#111827;color:#e5e7eb;font-size:12.5px;text-align:center;padding:7px 16px}
+.wrap{max-width:620px;margin:0 auto;padding:20px 16px 48px}
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}
+.who{display:flex;align-items:center;gap:11px;min-width:0}
+.who b{display:block;font-weight:700;font-size:15.5px}
+.who small{display:block;color:var(--muted);font-size:13px;line-height:1.3}
+.av{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--ac),var(--ac2));color:#fff;display:grid;place-items:center;font-weight:700;font-size:17px;box-shadow:0 4px 12px rgba(79,70,229,.3);flex:none;object-fit:cover}
+.lang{display:flex;background:#fff;border:1px solid var(--line);border-radius:999px;padding:3px;flex:none}
+.lang button{border:0;background:none;font:inherit;font-size:13px;font-weight:600;color:var(--muted);padding:5px 12px;border-radius:999px;cursor:pointer}
+.lang button.on{background:var(--ink);color:#fff}
+.lang button:disabled{cursor:not-allowed;opacity:.5}
+.card{background:#fff;border-radius:24px;box-shadow:0 1px 2px rgba(17,24,39,.04),0 12px 40px rgba(17,24,39,.08);padding:30px 28px;position:relative;overflow:hidden}
+@media (max-width:480px){.card{padding:24px 18px;border-radius:20px}}
+.prog{position:absolute;left:0;top:0;right:0;height:5px;background:#f1f5f9}
+.prog i{display:block;height:100%;background:linear-gradient(90deg,var(--ac),var(--ac2));transition:width .4s ease}
+.stepn{font-size:12.5px;font-weight:600;color:var(--ac);letter-spacing:.04em;text-transform:uppercase;margin-bottom:6px}
+h1{font-size:30px;line-height:1.15;letter-spacing:-.025em;margin:0 0 12px;font-weight:800}
+h2{font-size:23px;line-height:1.2;letter-spacing:-.02em;margin:0 0 6px;font-weight:700}
+h1:focus,h2:focus{outline:none}
+.sub{color:var(--muted);margin:0 0 22px}
+.perks{list-style:none;padding:0;margin:22px 0 26px;display:grid;gap:10px}
+.perks li{display:flex;gap:12px;align-items:flex-start;background:#fafafa;border:1px solid #f1f1f4;border-radius:14px;padding:12px 14px;font-size:15px}
+.perks span{font-size:20px;line-height:1.2}
+.f{margin-bottom:20px}
+.f>label,.f>.l{display:block;font-weight:600;font-size:15px;margin-bottom:7px}
+.f .req{color:var(--ac)}
+.hint{font-size:13px;color:var(--muted);margin:-3px 0 8px}
+input[type=text],textarea{width:100%;font:inherit;font-size:16px;color:var(--ink);background:#fff;border:1.5px solid var(--line);border-radius:14px;padding:13px 15px;outline:none;transition:border .15s,box-shadow .15s}
+textarea{min-height:110px;resize:vertical}
+input:focus,textarea:focus{border-color:var(--ac);box-shadow:0 0 0 4px rgba(79,70,229,.12)}
+.f.bad input,.f.bad textarea{border-color:var(--err)}
+.f .e{display:none;color:var(--err);font-size:13px;margin-top:6px}
+.f.bad .e{display:block}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media (max-width:480px){.row2{grid-template-columns:1fr;gap:0}}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:9px 15px;font:inherit;font-size:14.5px;cursor:pointer;color:var(--ink);transition:all .15s}
+.chip:hover{border-color:#c7d2fe}
+.chip.on{background:var(--ac);border-color:var(--ac);color:#fff}
+.chip:focus-visible,.path:focus-visible,.btn:focus-visible,.drop:focus-within{outline:3px solid rgba(79,70,229,.35);outline-offset:2px}
+.paths{display:grid;gap:12px}
+.path{display:flex;gap:16px;align-items:center;text-align:left;border:2px solid var(--line);background:#fff;border-radius:18px;padding:18px;font:inherit;color:var(--ink);cursor:pointer;transition:all .15s;width:100%}
+.path:hover{border-color:#c7d2fe;transform:translateY(-1px)}
+.path.on{border-color:var(--ac);background:var(--acbg)}
+.path .ic{width:48px;height:48px;border-radius:14px;display:grid;place-items:center;font-size:24px;background:var(--acbg);flex:none}
+.path b{display:block;font-size:16.5px;margin-bottom:2px}
+.path small{color:var(--muted);font-size:14px}
+.note{display:flex;gap:10px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:14px;padding:12px 14px;font-size:14px;color:#14532d;margin:0 0 20px}
+.drops{display:grid;grid-template-columns:1.4fr 1fr;gap:10px}
+.drops.one{grid-template-columns:1fr}
+.rec{display:flex;align-items:center;gap:14px;width:100%;text-align:left;border:2px solid var(--ac);background:var(--acbg);border-radius:18px;padding:14px 16px;font:inherit;color:var(--ink);cursor:pointer;margin:0 0 20px}
+.rec .mic{width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,var(--ac),var(--ac2));display:grid;place-items:center;font-size:22px;flex:none;box-shadow:0 6px 16px rgba(79,70,229,.3)}
+.rec b{display:block;font-size:16px}
+.rec small{display:block;color:var(--muted);font-size:13.5px}
+.rec.on{border-color:var(--err);background:#fef2f2}
+.rec .dot{width:46px;height:46px;border-radius:50%;background:var(--err);flex:none;animation:pulse 1.2s ease-in-out infinite}
+.rec .time{font-size:22px;font-weight:700;font-variant-numeric:tabular-nums}
+@keyframes pulse{0%,100%{transform:scale(.8);opacity:1}50%{transform:scale(1);opacity:.6}}
+.files li.v{flex-wrap:wrap}
+.files li.v audio{flex-basis:100%;width:100%;height:36px;margin-top:4px}
+.files.voices{margin:-8px 0 20px}
+@media (max-width:380px){.drops{grid-template-columns:1fr}}
+.drop{border:2px dashed #c7d2fe;background:#fafaff;border-radius:18px;padding:18px 16px;text-align:center;cursor:pointer;transition:all .15s;display:block}
+.drop:hover,.drop.over{background:var(--acbg);border-color:var(--ac)}
+.drop .big{font-size:30px}
+.drop b{display:block;margin:4px 0 2px;color:var(--ac)}
+.drop small{color:var(--muted)}
+.files{list-style:none;padding:0;margin:12px 0 0;display:grid;gap:8px}
+.files li{display:flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:12px;padding:9px 12px;font-size:14px}
+.files .nm{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.files .sz{color:var(--muted);font-size:13px;white-space:nowrap}
+.files button{border:0;background:none;color:var(--muted);font-size:20px;cursor:pointer;line-height:1;padding:0 4px}
+.bar{height:4px;background:#f1f5f9;border-radius:2px;overflow:hidden;margin-top:5px}
+.bar i{display:block;height:100%;width:0;background:var(--ok);transition:width .2s}
+.total{margin-top:16px;font-size:14px;color:var(--muted)}
+.total .bar{height:8px;border-radius:4px;margin-top:6px}
+.check{display:flex;gap:12px;align-items:flex-start;background:#fafafa;border:1.5px solid #f1f1f4;border-radius:14px;padding:14px;cursor:pointer;font-size:14px;color:#374151}
+.f>label.check{font-weight:400;font-size:14px;margin:0}
+.own{margin-top:9px;padding:10px 13px!important;font-size:15px!important;border-style:dashed!important}
+.own:focus{border-style:solid!important}
+.own:not(:placeholder-shown){border-style:solid!important;border-color:var(--ac);background:var(--acbg)}
+.check input{width:20px;height:20px;accent-color:var(--ac);flex:none;margin-top:1px}
+.f.bad .check{border-color:var(--err)}
+.nav{display:flex;gap:10px;margin-top:26px;flex-wrap:wrap}
+.btn{flex:1;border:0;border-radius:14px;padding:15px 20px;font:inherit;font-weight:700;font-size:16px;cursor:pointer;color:#fff;background:linear-gradient(135deg,var(--ac),var(--ac2));box-shadow:0 8px 20px rgba(79,70,229,.28);transition:transform .1s,opacity .15s;text-decoration:none;text-align:center}
+.btn:active{transform:scale(.99)}
+.btn[disabled]{opacity:.6;cursor:wait}
+.ghost{flex:0 0 auto;background:#fff;color:var(--ink);border:1.5px solid var(--line);box-shadow:none;font-weight:600}
+.small{font-size:12.5px;color:var(--muted);text-align:center;margin-top:18px}
+.fade{animation:fade .35s ease}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.done{text-align:center}
+.done .big{width:72px;height:72px;border-radius:50%;margin:4px auto 16px;display:grid;place-items:center;font-size:34px;background:#ecfdf5;color:var(--ok)}
+.rid{display:inline-block;background:#f3f4f6;border-radius:8px;padding:3px 10px;font-weight:600;font-size:14px;letter-spacing:.03em}
+.share{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.share .btn{padding:12px 14px;font-size:15px}
+.wa{background:#25d366;box-shadow:none}.vb{background:#7360f2;box-shadow:none}
+.link{margin-top:10px;font-size:13px;color:var(--muted);word-break:break-all;user-select:all}
+.warn{background:#fffbeb;border:1px solid #fde68a;border-radius:12px;padding:10px 12px;font-size:14px;margin-top:14px;text-align:left}
+.sheet{margin-top:22px;text-align:left;background:#fffbeb;border:1px dashed #f59e0b;border-radius:14px;padding:14px;font-size:13px}
+.sheet table{width:100%;border-collapse:collapse;margin-top:6px}
+.sheet td{border-top:1px solid #fde68a;padding:4px 6px;vertical-align:top}
+.sheet td:first-child{color:var(--muted);width:40%}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+</style>
+</head>
+<body>
+<div id="demobar"></div>
+<div class="wrap">
+  <div class="top">
+    <div class="who"><div id="av"></div><div><b id="owner"></b><small id="intro"></small></div></div>
+    <div class="lang" role="group" aria-label="Jezik / Language"><button data-l="sl">SL</button><button data-l="en">EN</button></div>
+  </div>
+  <main class="card" id="card" aria-live="polite"></main>
+  <p class="small" id="foot"></p>
+</div>
+
+<script>var CFG = null;</script>
+<script>CFG = {"name":"Jan L.","email":"workaholic981@gmail.com","introSl":"Avtomatizacija poslovnih procesov","introEn":"Business process automation","photo":"","url":"https://automate-and-improve.github.io/","api":"https://script.google.com/macros/s/AKfycbyBORaF69pj2KqXlj2jxYcYDZIpzbpLIP2LshHG9ACfzYKTsE_cg3cWKnG6WY-lupYvmQ/exec","maxFiles":10,"maxFile":314572800,"maxTotal":1073741824};</script>
+<script>
+var ON_GOOGLE = typeof google !== 'undefined' && !!google.script;   // served by Apps Script (inside Google's frame)
+var DEMO = !CFG || (!ON_GOOGLE && !CFG.api);                         // opened from disk: fake server
+if (!CFG) CFG = { name: '[Your name]', email: '[your email]', introSl: '', introEn: '', photo: '',
+  url: 'https://script.google.com/macros/s/DEMO/exec', maxFiles: 10, maxFile: 300 * 1048576, maxTotal: 1073741824 };
+var CHUNK = 4 * 1024 * 1024;  // 4 MB pieces through the server (Drive needs multiples of 256 KB)
+var DCHUNK = 8 * 1024 * 1024; // 8 MB pieces when the phone sends straight to Drive
+var DRAFT = 'intake-draft-v1';
+
+// Choice answers are stored as keys, so switching language never mixes labels. The Sheet gets the English label.
+var OPT = {
+  often: [['daily', 'Dnevno', 'Daily'], ['weekly', 'Tedensko', 'Weekly'], ['monthly', 'Mesečno', 'Monthly'], ['rarely', 'Redko', 'Rarely']],
+  hours: [['h0', 'Manj kot 1', 'Less than 1'], ['h1', '1-5', '1-5'], ['h5', '5-10', '5-10'], ['h10', '10-20', '10-20'], ['h20', 'Več kot 20', 'More than 20'], ['hx', 'Ne vem', "Don't know"]],
+  cost: [['c0', 'Pod 15 €', 'Under €15'], ['c15', '15-30 €', '€15-30'], ['c30', '30-60 €', '€30-60'], ['c60', 'Nad 60 €', 'Over €60'], ['cx', 'Ne vem', "Don't know"]],
+  tools: [['excel', 'Excel / Google Sheets', 'Excel / Google Sheets'], ['paper', 'Papir', 'Paper'], ['email', 'E-pošta', 'Email'], ['chat', 'WhatsApp / Viber', 'WhatsApp / Viber'], ['soft', 'Program za vašo panogo', 'Industry software']],
+  mistake: [['m0', 'Pod 100 €', 'Under €100'], ['m1', '100-1.000 €', '€100-1,000'], ['m2', '1.000-10.000 €', '€1,000-10,000'], ['m3', 'Nad 10.000 €', 'Over €10,000'], ['mx', 'Ne vem', "Don't know"]],
+  worth: [['w1', 'Pod 5.000 €', 'Under €5,000'], ['w2', '5.000-20.000 €', '€5,000-20,000'], ['w3', '20.000-50.000 €', '€20,000-50,000'], ['w4', 'Nad 50.000 €', 'Over €50,000'], ['wx', 'Ne vem', "Don't know"]],
+  budget: [['b1', 'Pod 2.000 €', 'Under €2,000'], ['b2', '2.000-5.000 €', '€2,000-5,000'], ['b3', '5.000-15.000 €', '€5,000-15,000'], ['b4', 'Nad 15.000 €', 'Over €15,000'], ['bm', 'Mesečna naročnina je sprejemljiva', 'A monthly fee is OK'], ['bs', 'Delež dodatnega dobička (%)', 'A share of the extra profit (%)']],
+  urgent: [['now', 'Ta mesec', 'This month'], ['q', 'V 3 mesecih', 'Within 3 months'], ['later', 'Ni nujno', 'Not urgent']],
+  decide: [['yes', 'Da', 'Yes'], ['with', 'Skupaj z drugimi', 'Together with others'], ['no', 'Ne', 'No']]
+};
+var MULTI = { tools: 1, budget: 1 };
+
+var T = {
+  sl: {
+    h1: 'Katero delo vam ali vaši ekipi vsak teden pobere ure?',
+    intro: 'Opišite ročno delo, ki se ponavlja v vašem podjetju ali pri upravljanju premoženja: kaj je, kdo ga dela in kako pogosto. Vsako sporočilo preberem in se oglasim v 7 dneh – brezplačno in brez obveznosti.',
+    perks: [['⏱️', 'Približno 8 minut'], ['🎙️', 'Lahko pišete ali pa preprosto posnamete glasovno sporočilo, kot na WhatsAppu.'],
+      ['🔒', 'Odgovore preberem samo jaz; pri pregledu si pomagam z orodji, tudi z umetno inteligenco. Ničesar ne prodajam in ne objavljam.'],
+      ['🛡️', 'Brez tveganja: pregled in predlog sta brezplačna. Če začnemo projekt, plačate le varščino. Če rešitve ne spravim v delovanje, vam jo vrnem v celoti.']],
+    start: 'Začnimo', next: 'Naprej', back: 'Nazaj', send: 'Pošlji odgovore', sending: 'Pošiljam ...',
+    step: 'Korak', of: 'od', req: 'To polje je obvezno', badContact: 'Vpišite e-pošto ali telefonsko številko, da vam lahko odgovorim.',
+    foot: 'Prosim, ne delite gesel, bančnih podatkov ali osebnih podatkov vaših strank.',
+    restored: 'Nadaljujete, kjer ste ostali.',
+    resumed: 'Nadaljujem nalaganje, kjer se je ustavilo.',
+    pathH: 'Kaj potrebujete?', pathS: 'Izberite, kar vam je bližje.',
+    pathA: 'Nekaj želim izboljšati ali avtomatizirati', pathAs: 'Nekaj mi jemlje čas ali denar',
+    pathB: 'Imam idejo za aplikacijo', pathBs: 'Vem, kakšno aplikacijo potrebujem',
+    probH: 'Opišite težavo', probS: 'Kar po domače, s svojimi besedami: napišite ali posnemite.',
+    steps: 'Kako to poteka zdaj, korak za korakom?', stepsP: 'Kdo kaj naredi in s čim ...',
+    pain: 'Kaj gre najpogosteje narobe ali vas najbolj moti?',
+    perfect: 'Če bi vse delovalo brezhibno, kaj bi bilo drugače?',
+    ideaH: 'Vaša ideja', ideaS: 'Kar po domače, s svojimi besedami: napišite ali posnemite.',
+    ideaSafe: 'Vaša ideja ostane vaša: ne delim je in je ne prodajam drugim.',
+    ideaWhat: 'Kaj naj orodje dela?', ideaWho: 'Kdo bi ga uporabljal in kako pogosto?',
+    timeH: 'Koliko časa gre za to?', timeS: 'Zadošča groba ocena. Nobeno vprašanje tu ni obvezno.',
+    often: 'Kako pogosto?', hours: 'Koliko ur na teden to vzame (vsem skupaj)?', cost: 'Koliko stane ena ura tega dela?',
+    tools: 'S čim to delate zdaj?', multiHint: 'Izberite vse, kar velja.',
+    own: { often: 'ali vpišite: npr. 3-krat na teden', hours: 'ali vpišite točno: npr. 12 ur', cost: 'ali vpišite točno: npr. 25 €/uro',
+      tools: 'kaj drugega? npr. Pantheon, Minimax', mistake: 'ali vpišite točno: npr. 800 €', worth: 'ali vpišite točno: npr. 15.000 € na leto',
+      budget: 'ali vpišite: npr. 4.000 €, 200 € na mesec ali 10 % dodatnega dobička', urgent: 'ali vpišite: npr. do marca', decide: 'ali vpišite: npr. odloča direktor' },
+    valH: 'Vrednost in nujnost', valS: 'Da vem, kakšna rešitev je smiselna in koliko bi se vam splačala. Zadošča groba ocena; nobeno vprašanje tu ni obvezno.',
+    mistake: 'Koliko približno stane ena napaka ali zamuda?', worth: 'Koliko bi vam bila rešitev vredna na leto?',
+    budget: 'Koliko bi bili pripravljeni vložiti?', urgent: 'Kako nujno je?', decide: 'Ali o tem odločate sami?',
+    aboutH: 'Še nekaj o vas', aboutS: 'Da vem, komu odgovarjam.',
+    name: 'Ime in priimek', contact: 'E-pošta ali telefon',
+    contactHint: 'Če vpišete e-pošto, vam tja pošljem potrditev z vsemi odgovori. Na to sporočilo lahko kasneje odgovorite in vse ostane na enem mestu.',
+    confirmSent: 'Potrditev z vsemi odgovori je na poti na {TO}. Če je ne vidite, preverite mapo z neželeno pošto.', business: 'Podjetje ali organizacija',
+    industry: 'Panoga', industryP: 'npr. gostinstvo, gradbeništvo, računovodstvo',
+    employees: 'Število zaposlenih', employeesP: 'npr. 12', country: 'Država', countryP: 'npr. Slovenija',
+    referrer: 'Kdo vam je poslal to povezavo?', referrerP: 'ime prijatelja ali znanca',
+    privacy: 'Strinjam se, da {NAME} moje odgovore in datoteke shrani v svoj Google Drive in jih uporabi samo za odgovor na to povpraševanje (pri pregledu si pomaga tudi z orodjem umetne inteligence). Hrani jih največ 12 mesecev, na zahtevo ({EMAIL}) jih izbriše prej.',
+    savedH: 'Odgovori so shranjeni ✓', savedS: 'Zdaj se nalagajo vaše datoteke.',
+    filesL: 'Slike, dokumenti ali video (neobvezno)', filesHint: 'Če kaj pomaga razumeti: fotografija, tabela, kratek video. Naložijo se, ko pošljete odgovore.',
+    voice: 'Glasovno sporočilo', voiceS: 'posnemite ali izberite posnetek',
+    recBig: 'Raje povejte? Posnemite glasovno sporočilo', recTap: 'Tapnite za začetek snemanja',
+    recOn: 'Snemam … tapnite za konec', recName: 'glasovno-sporocilo', recFail: 'Snemanje tukaj ne deluje. Nič hudega:', recVideo: '🎥 Posnemite kratek video (kar govorite)', recPhone: '🎙️ Odprite snemalnik telefona', recType: 'Ali pa na kratko napišite spodaj.', recApp: 'Namig: če stran odprete v Safariju ali Chromu (meni ⋯ → Odpri v brskalniku), lahko snemate kar tukaj.',
+    reqOrVoice: 'Napišite nekaj besed ali posnemite glasovno sporočilo.', voiceOnly: '[glasovno sporočilo]',
+    drop: 'Dodajte datoteke', dropS: 'do {N} datotek, vsaka do {MB} MB',
+    keepOpen: 'Med nalaganjem ne zaklepajte zaslona in ne zapirajte strani.',
+    upload: 'Naloži in zaključi', noFiles: 'Zaključi brez datotek', uploading: 'Nalagam ...', skip: 'Preskoči preostale',
+    tooBig: '{F}: datoteka je večja od {MB} MB.', tooMany: 'Največ {N} datotek ali 1 GB skupaj.', badType: '{F}: te vrste datoteke ne sprejemam.',
+    total: 'Naloženo {P} %', left: 'še približno {T}', min: '{N} min', lessMin: 'manj kot minuta',
+    thanksH: 'Hvala, {FIRST}!', thanksH0: 'Hvala!', closeOk: 'To je vse. Stran lahko zdaj zaprete.',
+    thanks: 'V 7 dneh se oglasim z enim od treh odgovorov: z načrtom in ceno (zagon + mesečno), z brezplačnim nasvetom, ki ga lahko uporabite sami, ali z iskrenim »to ni zame« in namigom, kam se obrniti.',
+    ridL: 'Številka povpraševanja:',
+    shareH: 'Poznate podjetje ali nekoga z večjim premoženjem, kjer neko delo vsak teden pobere ure? Delite povezavo:', copy: 'Kopiraj', copied: 'Kopirano ✓', copyFail: 'Označite povezavo spodaj in jo kopirajte.',
+    shareText: 'Če ti v podjetju neko delo vsak teden pobere ure, ga opiši tukaj. Izdelujem aplikacije, ki ga prevzamejo (8 minut, brezplačno): ',
+    upFail: 'Teh datotek ni bilo mogoče naložiti: {FILES}. Odgovori so shranjeni; datoteke mi lahko pošljete po e-pošti ({EMAIL}) s številko povpraševanja.',
+    skipped: 'Nalaganje preostalih datotek ste preskočili. Če jih želite poslati, mi pišite na {EMAIL} s številko povpraševanja.',
+    sendFail: 'Pošiljanje ni uspelo. Preverite povezavo in poskusite znova.',
+    limit: 'Danes je prispelo preveč povpraševanj. Prosim, poskusite jutri; vaši odgovori ostanejo shranjeni na tej napravi.',
+    leave: 'Odgovori še niso poslani. Res želite zapustiti stran?'
+  },
+  en: {
+    h1: 'What work takes you or your team hours every week?',
+    intro: 'Describe repetitive manual work in your company or in managing your assets: what it is, who does it, how often. I read every message and get back to you within 7 days – free and with no obligation.',
+    perks: [['⏱️', 'About 8 minutes'], ['🎙️', 'You can type, or simply record a voice message, like on WhatsApp.'],
+      ['🔒', "Only I read your answers; I use tools to help, including AI. I don't sell or publish anything."],
+      ['🛡️', "No risk: the review and proposal are free. If we start a project, you only pay a deposit. If I can't make it work, you get all of it back."]],
+    start: "Let's start", next: 'Next', back: 'Back', send: 'Send answers', sending: 'Sending...',
+    step: 'Step', of: 'of', req: 'This field is required', badContact: 'Please enter an email or phone number so I can reply.',
+    foot: "Please don't share passwords, bank details or your customers' personal data.",
+    restored: 'Picking up where you left off.',
+    resumed: 'Continuing the upload where it stopped.',
+    pathH: 'What do you need?', pathS: 'Pick the one closer to you.',
+    pathA: 'I want to improve or automate something', pathAs: 'Something eats my time or money',
+    pathB: 'I have an idea for an app', pathBs: 'I know what app I need',
+    probH: 'Describe the problem', probS: 'In your own words: type it or record it.',
+    steps: 'How does it work today, step by step?', stepsP: 'Who does what, with which tools...',
+    pain: 'What goes wrong or annoys you most?',
+    perfect: 'If everything worked perfectly, what would be different?',
+    ideaH: 'Your idea', ideaS: 'In your own words: type it or record it.',
+    ideaSafe: "Your idea stays yours: I don't share it or sell it to anyone.",
+    ideaWhat: 'What should the tool do?', ideaWho: 'Who would use it, and how often?',
+    timeH: 'How much time does it take?', timeS: 'A rough guess is enough. Nothing here is required.',
+    often: 'How often?', hours: 'How many hours a week does it take (everyone together)?', cost: 'What does one hour of that work cost?',
+    tools: 'What do you use for it today?', multiHint: 'Pick all that apply.',
+    own: { often: 'or type it: e.g. 3 times a week', hours: 'or type the exact number: e.g. 12 hours', cost: 'or type it exactly: e.g. €25/hour',
+      tools: 'anything else? e.g. QuickBooks, SAP', mistake: 'or type it exactly: e.g. €800', worth: 'or type it exactly: e.g. €15,000 a year',
+      budget: 'or type it: e.g. €4,000, €200 a month or 10% of the extra profit', urgent: 'or type it: e.g. by March', decide: 'or type it: e.g. the director decides' },
+    valH: 'Value and urgency', valS: 'So I know what kind of solution makes sense and what it would be worth to you. A rough guess is enough; nothing here is required.',
+    mistake: 'Roughly what does one mistake or delay cost?', worth: 'How much would solving this be worth to you per year?',
+    budget: 'How much would you be willing to invest?', urgent: 'How urgent is it?', decide: 'Do you make this decision yourself?',
+    aboutH: 'A bit about you', aboutS: "So I know who I'm replying to.",
+    name: 'Name', contact: 'Email or phone',
+    contactHint: "If you enter an email, I'll send a confirmation with all your answers there. You can reply to it later and everything stays in one place.",
+    confirmSent: "A confirmation with all your answers is on its way to {TO}. If you can't see it, check your spam folder.", business: 'Business or organisation',
+    industry: 'Industry', industryP: 'e.g. restaurant, construction, accounting',
+    employees: 'Number of employees', employeesP: 'e.g. 12', country: 'Country', countryP: 'e.g. Slovenia',
+    referrer: 'Who sent you this link?', referrerP: "a friend's name",
+    privacy: 'I agree that {NAME} stores my answers and files in their Google Drive and uses them only to reply to this request (with help from an AI tool when reviewing). They are kept for at most 12 months and deleted sooner on request ({EMAIL}).',
+    savedH: 'Your answers are saved ✓', savedS: 'Now uploading your files.',
+    filesL: 'Photos, documents or video (optional)', filesHint: 'Anything that helps explain it: a photo, a spreadsheet, a short video. They upload when you send your answers.',
+    voice: 'Voice message', voiceS: 'record or pick a recording',
+    recBig: 'Rather say it? Record a voice message', recTap: 'Tap to start recording',
+    recOn: 'Recording … tap to stop', recName: 'voice-message', recFail: "Recording doesn't work here. No problem:", recVideo: '🎥 Record a short video instead (just talk)', recPhone: "🎙️ Open your phone's recorder", recType: 'Or just type a few lines below.', recApp: 'Tip: open this page in Safari or Chrome (menu ⋯ → Open in browser) to record right here.',
+    reqOrVoice: 'Write a few words or record a voice message.', voiceOnly: '[voice message]',
+    drop: 'Add files', dropS: 'up to {N} files, {MB} MB each',
+    keepOpen: "Please keep the screen on and this page open while uploading.",
+    upload: 'Upload and finish', noFiles: 'Finish without files', uploading: 'Uploading...', skip: 'Skip the rest',
+    tooBig: '{F}: larger than {MB} MB.', tooMany: 'At most {N} files or 1 GB in total.', badType: "{F}: this file type isn't accepted.",
+    total: '{P} % uploaded', left: 'about {T} left', min: '{N} min', lessMin: 'less than a minute',
+    thanksH: 'Thank you, {FIRST}!', thanksH0: 'Thank you!', closeOk: "That's all. You can close this page now.",
+    thanks: "I'll get back to you within 7 days with one of three answers: a plan with the setup and monthly price, a free tip you can use yourself, or an honest \"not for me\" with a pointer.",
+    ridL: 'Request number:',
+    shareH: 'Know a company, or someone managing larger assets, where some work takes hours every week? Share the link:', copy: 'Copy', copied: 'Copied ✓', copyFail: 'Select the link below and copy it.',
+    shareText: 'If some work in your company takes hours every week, describe it here. I build apps that take it over (8 minutes, free): ',
+    upFail: "These files couldn't be uploaded: {FILES}. Your answers are saved; you can email the files to me ({EMAIL}) with your request number.",
+    skipped: 'You skipped the remaining files. To send them, email me at {EMAIL} with your request number.',
+    sendFail: 'Sending failed. Check your connection and try again.',
+    limit: 'Too many requests arrived today. Please try again tomorrow; your answers stay saved on this device.',
+    leave: "Your answers aren't sent yet. Leave anyway?"
+  }
+};
+
+var lang = 'sl';
+try { if (!(navigator.languages || [navigator.language || 'sl']).some(function (l) { return /^sl/i.test(l); })) lang = 'en'; } catch (e) {}
+var a = { tools: [], budget: [] };   // answers (choice answers are keys)
+var step = 0, files = [], state = 'form';  // state: form -> uploading (only if files were added) -> done
+var confirmedTo = '', reqId = null, failed = [], skipped = false, sending = false, err = '', restored = false, cancel = false;
+
+function t(k) { return T[lang][k]; }
+function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+function fill(s) {
+  return s.replace(/\{NAME\}/g, CFG.name).replace(/\{EMAIL\}/g, CFG.email).replace(/\{N\}/g, CFG.maxFiles).replace(/\{MB\}/g, Math.round(CFG.maxFile / 1048576));
+}
+
+// ---------- draft: answers survive a reload, a killed tab or the back button ----------
+function saveDraft() {
+  try { localStorage.setItem(DRAFT, JSON.stringify({ a: a, step: step, lang: lang, t: Date.now() })); } catch (e) {}
+}
+function loadDraft() {
+  try {
+    var d = JSON.parse(localStorage.getItem(DRAFT) || 'null');
+    if (d && Date.now() - d.t < 7 * 24 * 3600 * 1000 && d.a) { a = d.a; a.tools = a.tools || []; a.budget = a.budget || []; if (a.toolsOther && !a.tools_own) a.tools_own = a.toolsOther; step = Math.min(d.step || 0, flow().length - 1); lang = d.lang || lang; restored = step > 0; }
+  } catch (e) {}
+}
+function clearDraft() { try { localStorage.removeItem(DRAFT); } catch (e) {} }
+
+// ---------- picked files survive a reload too ----------
+// Phones with little memory may close the page while the camera or gallery is open; the browser then reloads it.
+// Each picked file is kept in the browser's own storage (IndexedDB) until it is uploaded.
+var fileIds = [], resumed = false;      // fileIds[i] = storage key of files[i]
+var PENDING = 'intake-pending-v1';      // request number whose files still have to upload
+// Storage steps run strictly one after another (saves finish before a later read or delete).
+var idbQueue = Promise.resolve();
+function idb(mode, fn) {
+  idbQueue = idbQueue.then(function () { return idbStep(mode, fn); });
+  return idbQueue;
+}
+function idbStep(mode, fn) {
+  return new Promise(function (ok) {
+    try {
+      var open = indexedDB.open('intake-files', 1);
+      open.onupgradeneeded = function () { open.result.createObjectStore('files', { keyPath: 'id' }); };
+      open.onerror = function () { ok(null); };
+      open.onsuccess = function () {
+        try {
+          var db = open.result, tx = db.transaction('files', mode), req = fn(tx.objectStore('files'));
+          tx.oncomplete = function () { db.close(); ok(req ? req.result : true); };
+          tx.onerror = tx.onabort = function () { db.close(); ok(null); };
+        } catch (e) { ok(null); }
+      };
+    } catch (e) { ok(null); }   // storage blocked (private mode, strict settings): files just aren't kept
+  });
+}
+function keepFile(id, f) { return idb('readwrite', function (st) { st.put({ id: id, file: f, t: Date.now() }); }); }
+function dropFile(id) { return id ? idb('readwrite', function (st) { st.delete(id); }) : Promise.resolve(); }
+function dropAllFiles() { return idb('readwrite', function (st) { st.clear(); }); }
+async function restoreFiles() {
+  var rows = await idb('readonly', function (st) { return st.getAll(); });
+  rows = (rows || []).filter(function (r) { return r && r.file && Date.now() - r.t < 7 * 24 * 3600 * 1000; }).sort(function (x, y) { return x.t - y.t; });
+  files = rows.map(function (r) { return r.file; });
+  fileIds = rows.map(function (r) { return r.id; });
+  return files.length;
+}
+function setPending(on) {
+  try { if (on) localStorage.setItem(PENDING, JSON.stringify({ id: reqId, name: a.name || '', t: Date.now() })); else localStorage.removeItem(PENDING); } catch (e) {}
+}
+function dirty() { return state === 'uploading' || (state === 'form' && !!(a.steps || a.ideaWhat || a.name || files.length)); }
+
+// ---------- building blocks ----------
+function text(k, lab, o) {
+  o = o || {};
+  var attrs = ' id="q_' + k + '" data-k="' + k + '" placeholder="' + esc(o.ph || '') + '"' + (o.auto ? ' autocomplete="' + o.auto + '"' : '');
+  var field = o.area ? '<textarea' + attrs + '>' + esc(a[k]) + '</textarea>' : '<input type="text"' + attrs + ' value="' + esc(a[k]) + '">';
+  return '<div class="f" data-f="' + k + '"><label for="q_' + k + '">' + esc(lab) + (o.req ? ' <span class="req" aria-hidden="true">*</span>' : '') + '</label>' +
+    (o.hint ? '<div class="hint">' + esc(o.hint) + '</div>' : '') + field +
+    '<div class="e">' + esc(o.err || t('req')) + '</div></div>';
+}
+function chips(k, lab) {
+  var multi = MULTI[k];
+  var h = '<div class="f" role="group" aria-label="' + esc(lab) + '"><div class="l">' + esc(lab) + '</div>' + (multi ? '<div class="hint">' + esc(t('multiHint')) + '</div>' : '') + '<div class="chips">';
+  OPT[k].forEach(function (o) {
+    var on = multi ? a[k].indexOf(o[0]) > -1 : a[k] === o[0];
+    h += '<button type="button" class="chip' + (on ? ' on' : '') + '" aria-pressed="' + on + '" data-chip="' + k + '" data-v="' + o[0] + '">' + esc(o[lang === 'sl' ? 1 : 2]) + '</button>';
+  });
+  // Their own answer: an exact number beats a range. For one-answer questions typing replaces the chip.
+  return h + '</div><input type="text" class="own" data-own="' + k + '" aria-label="' + esc(lab) + '" placeholder="' + esc(t('own')[k]) + '" value="' + esc(a[k + '_own']) + '"></div>';
+}
+// ---------- voice message (like WhatsApp): record in the page; where the browser blocks the microphone
+// (inside Google's frame) the button opens the phone's own recorder instead ----------
+var recState = null, voiceCount = 0;
+function canMic() {
+  try { if (document.featurePolicy && !document.featurePolicy.allowsFeature('microphone')) return false; } catch (e) {}
+  try { if (window.self !== window.top && !DEMO) return false; } catch (e) { return false; }   // inside Google's frame (Safari has no featurePolicy)
+  return !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia && window.MediaRecorder);
+}
+var UA = navigator.userAgent, IOS = /iPad|iPhone|iPod/.test(UA) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+var PHONE = IOS || /Android/i.test(UA);
+var IN_APP = /FBAN|FBAV|Instagram|Line\/|Viber|WhatsApp|LinkedInApp|GSA\/|; wv\)/.test(UA);   // an app's built-in browser: often no microphone
+function fmtT(ms) { var sec = Math.floor(ms / 1000); return Math.floor(sec / 60) + ':' + ('0' + sec % 60).slice(-2); }
+function recInner() {
+  if (recState) return '<span class="dot" aria-hidden="true"></span><span><span class="time">' + fmtT(Date.now() - recState.t0) + '</span><small>' + esc(t('recOn')) + '</small></span>';
+  return '<span class="mic" aria-hidden="true">🎙️</span><span><b>' + esc(t('recBig')) + '</b><small>' + esc(t('recTap')) + '</small></span>';
+}
+function recorderBox() {
+  return '<button type="button" class="rec' + (recState ? ' on' : '') + '" id="rec">' + recInner() + '</button>' +
+    '<input type="file" id="voice" hidden ' + (IOS ? 'accept="video/*" capture="user"' : 'accept="audio/*" capture') + '><div id="recerr"></div><ul class="files voices" id="vlist"></ul>';
+}
+function recUI() { var b = document.getElementById('rec'); if (b) { b.innerHTML = recInner(); b.classList.toggle('on', !!recState); } }
+async function toggleRecord() {
+  if (recState) return stopRecord();
+  if (!canMic()) return recFallback();
+  var stream;
+  try { stream = await navigator.mediaDevices.getUserMedia({ audio: true }); }
+  catch (e) { return recFallback(); }   // refused, or the browser (an app's built-in one) has no microphone
+  var types = ['audio/webm;codecs=opus', 'audio/mp4', 'audio/webm', 'audio/ogg'];
+  var mime = types.filter(function (m) { return window.MediaRecorder.isTypeSupported && MediaRecorder.isTypeSupported(m); })[0];
+  var rec = mime ? new MediaRecorder(stream, { mimeType: mime }) : new MediaRecorder(stream), chunks = [];
+  rec.ondataavailable = function (e) { if (e.data && e.data.size) chunks.push(e.data); };
+  recState = { rec: rec, stream: stream, chunks: chunks, t0: Date.now() };
+  recState.timer = setInterval(function () { recUI(); if (recState && Date.now() - recState.t0 > 10 * 60 * 1000) stopRecord(); }, 500);
+  rec.start(1000);
+  recUI();
+}
+// Recording can't start here: never send people into settings. Offer a button they tap themselves (Safari only opens
+// the camera/recorder from a real tap): iPhone = short video with sound, Android = the phone's recorder, laptop = type.
+function recFallback() {
+  var re = document.getElementById('recerr'); if (!re) return;
+  re.innerHTML = '<div class="warn" role="status">' + esc(t('recFail')) +
+    (PHONE ? '<button type="button" class="btn ghost" id="recalt" style="display:block;width:100%;margin:10px 0 6px">' + esc(IOS ? t('recVideo') : t('recPhone')) + '</button>' : ' ') +
+    esc(t('recType')) + (IN_APP ? '<br><small>' + esc(t('recApp')) + '</small>' : '') + '</div>';
+  var alt = document.getElementById('recalt'), native = document.getElementById('voice');
+  if (alt && native) alt.onclick = function () { native.click(); };
+  if (!PHONE) { var ta = document.querySelector('textarea'); if (ta) ta.focus(); }
+}
+function stopRecord() {
+  var st = recState; if (!st) return Promise.resolve();
+  return new Promise(function (done) {
+    st.rec.onstop = function () {
+      clearInterval(st.timer);
+      st.stream.getTracks().forEach(function (tr) { tr.stop(); });
+      var type = (st.rec.mimeType || 'audio/webm').split(';')[0];
+      var ext = /mp4/.test(type) ? 'm4a' : /ogg/.test(type) ? 'ogg' : 'webm';
+      var blob = new Blob(st.chunks, { type: type });
+      recState = null;
+      if (blob.size > 0) addFiles([new File([blob], t('recName') + '-' + (++voiceCount) + '-' + fmtT(Date.now() - st.t0).replace(':', 'm') + 's.' + ext, { type: type, lastModified: Date.now() })]);
+      recUI();
+      done();
+    };
+    st.rec.stop();
+  });
+}
+function hasVoice() { return files.some(function (f) { return /^audio\//.test(f.type) || /\.(m4a|mp3|wav|ogg|opus|amr|aac|webm)$/i.test(f.name) && /voice|glasovno|audio/i.test(f.name + f.type); }); }
+
+// Files are picked while they describe the problem; they upload after the answers are saved (answers can't be lost to a failed upload).
+function filePicker() {
+  return '<div class="f"><div class="l">' + esc(t('filesL')) + '</div><div class="hint">' + esc(t('filesHint')) + '</div>' +
+    '<div class="drops one"><label class="drop" id="drop"><div class="big" aria-hidden="true">📎</div><b>' + t('drop') + '</b><small>' + fill(t('dropS')) + '</small>' +
+    '<input type="file" id="picker" multiple hidden accept="image/*,video/*,audio/*,.pdf,.doc,.docx,.xls,.xlsx,.csv,.ppt,.pptx,.txt,.odt,.ods,.rtf"></label></div>' +
+    '<div id="ferr"></div><ul class="files" id="flist"></ul></div>';
+}
+function head(h, s) { return '<h2 tabindex="-1" id="h">' + t(h) + '</h2><p class="sub">' + t(s) + '</p>'; }
+
+// ---------- the steps (problem first, contact last: people commit once they've told their story) ----------
+var STEPS = {
+  welcome: function () {
+    var h = '<h1 tabindex="-1" id="h">' + t('h1') + '</h1><p class="sub">' + t('intro') + '</p><ul class="perks">';
+    t('perks').forEach(function (p) { h += '<li><span aria-hidden="true">' + p[0] + '</span><div>' + esc(p[1]) + '</div></li>'; });
+    return h + '</ul>';
+  },
+  path: function () {
+    function card(v, icon, k) {
+      return '<button type="button" class="path' + (a.path === v ? ' on' : '') + '" aria-pressed="' + (a.path === v) + '" data-path="' + v + '"><span class="ic" aria-hidden="true">' + icon + '</span><span><b>' + esc(t(k)) + '</b><small>' + esc(t(k + 's')) + '</small></span></button>';
+    }
+    return head('pathH', 'pathS') + '<div class="paths">' + card('fix', '⚙️', 'pathA') + card('idea', '💡', 'pathB') + '</div><div class="f" data-f="path"><div class="e">' + t('req') + '</div></div>';
+  },
+  problem: function () {
+    return head('probH', 'probS') + recorderBox() + text('steps', t('steps'), { area: 1, req: 1, ph: t('stepsP'), err: t('reqOrVoice') }) + text('pain', t('pain'), { area: 1 }) + text('perfect', t('perfect'), { area: 1 }) + filePicker();
+  },
+  idea: function () {
+    return head('ideaH', 'ideaS') + '<div class="note"><span aria-hidden="true">🔒</span><span>' + esc(t('ideaSafe')) + '</span></div>' +
+      recorderBox() + text('ideaWhat', t('ideaWhat'), { area: 1, req: 1, err: t('reqOrVoice') }) + text('ideaWho', t('ideaWho'), { area: 1 }) + filePicker();
+  },
+  time: function () {
+    return head('timeH', 'timeS') + chips('often', t('often')) + chips('hours', t('hours')) + chips('cost', t('cost')) + chips('tools', t('tools'));
+  },
+  value: function () {
+    return head('valH', 'valS') + (a.path === 'idea' ? '' : chips('mistake', t('mistake'))) + chips('worth', t('worth')) + chips('budget', t('budget')) + chips('urgent', t('urgent')) + chips('decide', t('decide'));
+  },
+  about: function () {
+    return head('aboutH', 'aboutS') + text('name', t('name'), { req: 1, auto: 'name' }) + text('contact', t('contact'), { req: 1, auto: 'email', err: t('badContact'), hint: t('contactHint') }) +
+      text('business', t('business'), { auto: 'organization' }) + text('industry', t('industry'), { ph: t('industryP') }) +
+      '<div class="row2">' + text('employees', t('employees'), { ph: t('employeesP') }) + text('country', t('country'), { ph: t('countryP'), auto: 'country-name' }) + '</div>' +
+      text('referrer', t('referrer'), { ph: t('referrerP') }) +
+      '<div class="hp" aria-hidden="true"><label for="q_hp_extra">Leave empty</label><input type="text" tabindex="-1" autocomplete="new-password" id="q_hp_extra" data-k="hp_extra"></div>' +
+      '<div class="f" data-f="privacy"><label class="check"><input type="checkbox" id="q_privacy"' + (a.privacy ? ' checked' : '') + '><span>' + esc(fill(t('privacy'))) + '</span></label><div class="e">' + t('req') + '</div></div>';
+  }
+};
+function flow() { return a.path === 'idea' ? ['welcome', 'path', 'idea', 'value', 'about'] : ['welcome', 'path', 'problem', 'time', 'value', 'about']; }
+var REQUIRED = { path: ['path'], problem: ['steps'], idea: ['ideaWhat'], about: ['name', 'contact', 'privacy'] };
+function contactOk(v) { v = (v || '').trim(); return /\S+@\S+\.\S+/.test(v) || (v.replace(/\D/g, '').length >= 7); }
+
+// ---------- render ----------
+function render() {
+  document.documentElement.lang = lang;
+  document.querySelectorAll('.lang button').forEach(function (b) { b.classList.toggle('on', b.dataset.l === lang); b.disabled = state === 'uploading' || sending; });
+  document.getElementById('foot').textContent = t('foot');
+  document.getElementById('intro').textContent = lang === 'sl' ? CFG.introSl : CFG.introEn;
+  if (state === 'done') return renderDone();
+  if (state !== 'form') return renderFiles();
+  var f = flow(), name = f[step], card = document.getElementById('card');
+  var h = '<div class="prog"><i style="width:' + Math.round(step / f.length * 100) + '%"></i></div><div class="fade">';
+  if (restored && step > 0) h += '<div class="note"><span aria-hidden="true">↩️</span><span>' + esc(t('restored')) + '</span></div>';
+  if (step > 0) h += '<div class="stepn">' + t('step') + ' ' + step + ' ' + t('of') + ' ' + (f.length - 1) + '</div>';
+  h += STEPS[name]();
+  var last = step === f.length - 1;
+  h += '<div class="nav">' + (step > 0 ? '<button type="button" class="btn ghost" id="back"' + (sending ? ' disabled' : '') + '>' + t('back') + '</button>' : '') +
+    '<button type="button" class="btn" id="next"' + (sending ? ' disabled' : '') + '>' + (sending ? t('sending') : step === 0 ? t('start') : last ? t('send') : t('next')) + '</button></div>';
+  if (err) h += '<div class="warn" role="alert">' + esc(err) + '</div>';
+  card.innerHTML = h + '</div>';
+  wire();
+}
+function wire() {
+  document.querySelectorAll('[data-k]').forEach(function (el) {
+    el.oninput = el.onchange = el.onblur = function () { a[el.dataset.k] = el.value; var f = el.closest('.f'); if (f) f.classList.remove('bad'); saveDraft(); };
+  });
+  document.querySelectorAll('[data-chip]').forEach(function (b) {
+    b.onclick = function () {
+      var k = b.dataset.chip, v = b.dataset.v;
+      if (MULTI[k]) { var i = a[k].indexOf(v); if (i > -1) a[k].splice(i, 1); else a[k].push(v); }
+      else {
+        a[k] = a[k] === v ? '' : v;
+        if (a[k]) { a[k + '_own'] = ''; var own = document.querySelector('[data-own="' + k + '"]'); if (own) own.value = ''; }
+      }
+      b.parentNode.querySelectorAll('.chip').forEach(function (c) {
+        var on = MULTI[k] ? a[k].indexOf(c.dataset.v) > -1 : a[k] === c.dataset.v;
+        c.classList.toggle('on', on); c.setAttribute('aria-pressed', on);
+      });
+      saveDraft();
+    };
+  });
+  document.querySelectorAll('[data-own]').forEach(function (el) {
+    el.oninput = function () {
+      var k = el.dataset.own;
+      a[k + '_own'] = el.value;
+      if (!MULTI[k] && el.value.trim() && a[k]) {
+        a[k] = '';
+        el.parentNode.querySelectorAll('.chip').forEach(function (c) { c.classList.remove('on'); c.setAttribute('aria-pressed', false); });
+      }
+      saveDraft();
+    };
+  });
+  document.querySelectorAll('[data-path]').forEach(function (b) { b.onclick = function () { a.path = b.dataset.path; saveDraft(); go(1); }; });
+  var pr = document.getElementById('q_privacy');
+  if (pr) pr.onchange = function () { a.privacy = pr.checked; pr.closest('.f').classList.remove('bad'); saveDraft(); };
+  if (document.getElementById('picker')) { wireFiles(); listFiles(); }
+  var rb = document.getElementById('rec'); if (rb) rb.onclick = toggleRecord;
+  var vi = document.getElementById('voice'); if (vi) vi.onchange = function () { addFiles(vi.files); vi.value = ''; };
+  document.getElementById('next').onclick = function () { go(1); };
+  var bk = document.getElementById('back'); if (bk) bk.onclick = function () { go(-1); };
+}
+function focusHead() { var h = document.getElementById('h'); if (h) try { h.focus({ preventScroll: true }); } catch (e) {} window.scrollTo(0, 0); }
+function syncFields() {
+  document.querySelectorAll('[data-k]').forEach(function (el) { a[el.dataset.k] = el.value; });
+  document.querySelectorAll('[data-own]').forEach(function (el) {
+    var k = el.dataset.own;
+    if (el.value !== (a[k + '_own'] || '')) { a[k + '_own'] = el.value; if (!MULTI[k] && el.value.trim()) a[k] = ''; }
+  });
+}
+function go(dir) {
+  if (sending) return;
+  if (recState) { stopRecord().then(function () { go(dir); }); return; }
+  syncFields(); saveDraft();
+  var f = flow(), name = f[step];
+  err = '';
+  if (dir > 0) {
+    var miss = (REQUIRED[name] || []).filter(function (k) {
+      if (k === 'contact') return !contactOk(a.contact);
+      if ((k === 'steps' || k === 'ideaWhat') && hasVoice()) return false;
+      return !a[k] || (typeof a[k] === 'string' && !a[k].trim());
+    });
+    document.querySelectorAll('.f.bad').forEach(function (e) { e.classList.remove('bad'); });
+    miss.forEach(function (k) { var e = document.querySelector('[data-f="' + k + '"]'); if (e) e.classList.add('bad'); });
+    if (miss.length) {
+      var first = document.querySelector('.f.bad');
+      if (first) { first.scrollIntoView({ behavior: 'smooth', block: 'center' }); var inp = first.querySelector('input,textarea'); if (inp) inp.focus({ preventScroll: true }); }
+      return;
+    }
+    if (step === f.length - 1) return send();
+  }
+  restored = false;
+  step = Math.max(0, Math.min(f.length - 1, step + dir));
+  saveDraft(); render(); focusHead();
+}
+
+// ---------- sending the answers ----------
+function server(fn) {
+  var args = [].slice.call(arguments, 1);
+  if (!DEMO && !ON_GOOGLE) {  // website mode: same server functions, called over the web (Code.gs doPost)
+    return fetch(CFG.api, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify({ fn: fn, args: args }) })
+      .then(function (res) { return res.json(); })
+      .then(function (j) { if (j.error) throw new Error(j.error); return j.result; });
+  }
+  return new Promise(function (ok, fail) {
+    var r = (DEMO ? demoServer : google.script.run).withSuccessHandler(ok).withFailureHandler(fail);
+    r[fn].apply(r, args);
+  });
+}
+function payload() {
+  var p = {}, keepFix = a.path !== 'idea';
+  ['name', 'contact', 'business', 'industry', 'employees', 'country', 'referrer', 'path', 'hp_extra'].forEach(function (k) { p[k] = a[k] || ''; });
+  // Only the chosen path's answers go to the sheet (someone may have filled both before going back).
+  ['steps', 'pain', 'perfect'].forEach(function (k) { p[k] = keepFix ? a[k] || '' : ''; });
+  ['ideaWhat', 'ideaWho'].forEach(function (k) { p[k] = keepFix ? '' : a[k] || ''; });
+  if (keepFix && !(p.steps || '').trim() && hasVoice()) p.steps = t('voiceOnly');      // described by voice only
+  if (!keepFix && !(p.ideaWhat || '').trim() && hasVoice()) p.ideaWhat = t('voiceOnly');
+  Object.keys(OPT).forEach(function (k) {
+    var keys = MULTI[k] ? a[k] : (a[k] ? [a[k]] : []);
+    if (!keepFix && /^(often|hours|cost|tools|mistake)$/.test(k)) keys = [];
+    var labels = keys.map(function (key) { var o = OPT[k].filter(function (x) { return x[0] === key; })[0]; return o ? o[2] : ''; }).filter(Boolean);
+    var own = keepFix || !/^(often|hours|cost|tools|mistake)$/.test(k) ? (a[k + '_own'] || '').trim() : '';
+    p[k] = labels.concat(own ? [own] : []).join(', ');  // their own words go to the sheet as typed
+  });
+  p.lang = lang; p.privacy = a.privacy === true; p.nonce = a.nonce || '';
+  p.summary = summary();
+  p.fileNames = files.map(function (f) { return f.name; });
+  return p;
+}
+/** Their answers as [question, answer] in their own language, for the confirmation email. */
+function summary() {
+  var rows = [], fix = a.path !== 'idea';
+  function add(label, v) { if (v && String(v).trim()) rows.push([label, String(v).trim()]); }
+  add(t('pathH'), a.path ? t(fix ? 'pathA' : 'pathB') : '');
+  if (fix) { add(t('steps'), a.steps); add(t('pain'), a.pain); add(t('perfect'), a.perfect); }
+  else { add(t('ideaWhat'), a.ideaWhat); add(t('ideaWho'), a.ideaWho); }
+  Object.keys(OPT).forEach(function (k) {
+    if (!fix && /^(often|hours|cost|tools|mistake)$/.test(k)) return;
+    var keys = MULTI[k] ? a[k] : (a[k] ? [a[k]] : []);
+    var labels = keys.map(function (key) { var o = OPT[k].filter(function (x) { return x[0] === key; })[0]; return o ? o[lang === 'sl' ? 1 : 2] : ''; }).filter(Boolean);
+    if ((a[k + '_own'] || '').trim()) labels.push(a[k + '_own'].trim());
+    add(t(k), labels.join(', '));
+  });
+  ['business', 'industry', 'employees', 'country', 'referrer'].forEach(function (k) { add(t(k), a[k]); });
+  return rows;
+}
+async function send() {
+  sending = true;
+  if (!a.nonce) { a.nonce = Date.now().toString(36) + Math.random().toString(36).slice(2, 10); saveDraft(); }
+  render();
+  try {
+    var r = await retry(function () { return server('submit', payload()); });
+    reqId = r.id; confirmedTo = r.confirmed ? (a.contact || '').trim() : ''; clearDraft();
+    if (files.length) setPending(true);   // if the page reloads mid-upload, it carries on by itself
+  } catch (e) {
+    err = /LIMIT/.test(msgOf(e)) ? t('limit') : t('sendFail');
+    sending = false; render(); focusHead();
+    return;
+  }
+  sending = false;
+  if (files.length) uploadAll(); else finish();
+}
+
+// ---------- files: picked on the problem step, uploaded after the answers are saved ----------
+function renderFiles() {
+  var h = '<div class="prog"><i style="width:100%"></i></div><div class="fade">' + head('savedH', 'savedS') +
+    '<p style="margin:-10px 0 18px"><span class="rid">' + esc(t('ridL')) + ' ' + esc(reqId) + '</span></p>' +
+    (resumed ? '<div class="note"><span aria-hidden="true">↩️</span><span>' + esc(t('resumed')) + '</span></div>' : '') +
+    '<ul class="files" id="flist"></ul><div class="warn" role="status">📱 ' + esc(t('keepOpen')) + '</div>' +
+    '<div class="total"><span id="tp">' + esc(t('total').replace('{P}', 0)) + '</span><div class="bar"><i id="tb"></i></div></div>' +
+    '<div class="nav"><button type="button" class="btn ghost" id="skip">' + t('skip') + '</button><button type="button" class="btn" disabled>' + t('uploading') + '</button></div>';
+  document.getElementById('card').innerHTML = h + '</div>';
+  listFiles();
+  document.getElementById('skip').onclick = function () { cancel = true; skipped = true; this.disabled = true; };
+}
+function wireFiles() {
+  var drop = document.getElementById('drop'), picker = document.getElementById('picker');
+  picker.onchange = function () { addFiles(picker.files); picker.value = ''; };
+  drop.ondragover = function (e) { e.preventDefault(); drop.classList.add('over'); };
+  drop.ondragleave = function () { drop.classList.remove('over'); };
+  drop.ondrop = function (e) { e.preventDefault(); drop.classList.remove('over'); addFiles(e.dataTransfer.files); };
+}
+var OK_TYPES = /\.(jpe?g|png|gif|webp|heic|heif|bmp|tiff?|mp4|mov|m4v|3gp|webm|avi|mkv|mp3|m4a|aac|wav|ogg|opus|amr|pdf|docx?|xlsx?|csv|pptx?|txt|odt|ods|odp|rtf)$/i;
+function addFiles(list) {
+  var errs = [], total = files.reduce(function (s, f) { return s + f.size; }, 0);
+  [].forEach.call(list, function (f) {
+    if (!OK_TYPES.test(f.name) && !/^(image|video|audio)\/|^application\/pdf$/.test(f.type || '')) { errs.push(t('badType').replace('{F}', f.name)); return; }
+    if (f.size > CFG.maxFile) { errs.push(fill(t('tooBig')).replace('{F}', f.name)); return; }
+    if (files.length >= CFG.maxFiles || total + f.size > CFG.maxTotal) { var m = fill(t('tooMany')); if (errs.indexOf(m) < 0) errs.push(m); return; }
+    var same = files.some(function (g) { return g.name === f.name && g.size === f.size && g.lastModified === f.lastModified; });
+    if (same) return;
+    if (f.size > 0) {
+      var id = Date.now().toString(36) + '-' + Math.random().toString(36).slice(2, 8);
+      files.push(f); fileIds.push(id); total += f.size;
+      keepFile(id, f);
+    }
+  });
+  listFiles();
+  var fe = document.getElementById('ferr');
+  if (fe) fe.innerHTML = '';
+  if (errs.length && fe) fe.innerHTML = '<div class="warn" role="alert">' + errs.map(esc).join('<br>') + '</div>';
+}
+var urls = [];
+function fileUrl(f) {   // one playback address per file, reused across re-renders
+  for (var i = 0; i < urls.length; i++) if (urls[i][0] === f) return urls[i][1];
+  var u = URL.createObjectURL(f); urls.push([f, u]); return u;
+}
+function mb(n) { return n < 1048576 ? Math.max(1, Math.round(n / 1024)) + ' KB' : (n / 1048576).toFixed(1) + ' MB'; }
+function listFiles() {
+  var ul = document.getElementById('flist'), vl = document.getElementById('vlist'); if (!ul) return;
+  var main = [], voices = [];
+  files.forEach(function (f, i) {
+    var audio = /^audio\//.test(f.type);
+    var ic = /^image/.test(f.type) ? '🖼️' : /^video/.test(f.type) ? '🎬' : audio ? '🎙️' : '📄';
+    // Recordings sit right under the record button, with a full-width play bar (listen back before sending).
+    var play = audio && state === 'form' ? '<audio controls preload="metadata" src="' + fileUrl(f) + '"></audio>' : '';
+    var li = '<li' + (play ? ' class="v"' : '') + '><span aria-hidden="true">' + ic + '</span><div class="nm">' + esc(f.name) + '<div class="bar"><i id="pb' + i + '"></i></div></div><span class="sz">' + mb(f.size) + '</span>' +
+      (state === 'form' ? '<button type="button" data-rm="' + i + '" aria-label="Remove ' + esc(f.name) + '">×</button>' : '') + play + '</li>';
+    (audio && vl ? voices : main).push(li);
+  });
+  ul.innerHTML = main.join('');
+  if (vl) vl.innerHTML = voices.join('');
+  document.querySelectorAll('#flist [data-rm], #vlist [data-rm]').forEach(function (b) { b.onclick = function () { var i = +b.dataset.rm; dropFile(fileIds[i]); files.splice(i, 1); fileIds.splice(i, 1); listFiles(); }; });
+}
+function readPiece(file, start) {
+  return new Promise(function (ok, fail) {
+    var fr = new FileReader();
+    fr.onload = function () { ok(String(fr.result).split(',')[1] || ''); };
+    fr.onerror = function () { fail(fr.error); };
+    fr.readAsDataURL(file.slice(start, Math.min(start + CHUNK, file.size)));
+  });
+}
+function wait(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
+function msgOf(e) { return String(e && e.message || e); }
+/** Retries a server call after network trouble; errors the server raised on purpose (type, size, limit, expired) are not retried. */
+async function retry(fn) {
+  for (var i = 0; ; i++) {
+    try { return await fn(); }
+    catch (e) { if (/TYPE|SIZE|LIMIT|EXPIRED|Missing|Bad request/.test(msgOf(e)) || i >= BACKOFF.length) throw e; await wait(BACKOFF[i]); }
+  }
+}
+// Keep the screen on while uploading; browsers drop the lock when the page is hidden, so ask again on return.
+var wakeLock = null;
+async function keepAwake() { try { if (navigator.wakeLock && state === 'uploading') wakeLock = await navigator.wakeLock.request('screen'); } catch (e) {} }
+document.addEventListener('visibilitychange', function () { if (document.visibilityState === 'visible') keepAwake(); });
+var sentBytes = 0, totalBytes = 0;
+function progress(i, pos, size) {
+  var bar = document.getElementById('pb' + i); if (bar) bar.style.width = Math.round(pos / size * 100) + '%';
+  var p = totalBytes ? Math.round((sentBytes + pos) / totalBytes * 100) : 100;
+  var tp = document.getElementById('tp'), tb = document.getElementById('tb');
+  if (tp) tp.textContent = t('total').replace('{P}', p) + timeLeft(sentBytes + pos);
+  if (tb) tb.style.width = p + '%';
+}
+// Time left from the speed so far (shown after a few seconds, once the speed means something).
+var upT0 = 0, upB0 = 0;
+function timeLeft(done) {
+  var sec = (Date.now() - upT0) / 1000, rate = (done - upB0) / sec;
+  if (!upT0 || sec < 4 || rate <= 0 || done >= totalBytes) return '';
+  var m = Math.round((totalBytes - done) / rate / 60);
+  return ' · ' + t('left').replace('{T}', m < 1 ? t('lessMin') : t('min').replace('{N}', m));
+}
+var BACKOFF = [2000, 5000, 15000, 30000];
+// Two routes to Drive. Fast: the phone sends the file straight to a one-file upload address the server opened.
+// Fallback: pieces go through the server (slow but always works). A file can switch routes mid-way: same Drive session.
+var direct = true, directFails = 0;
+async function putDirect(url, file, pos) {
+  var end = Math.min(pos + DCHUNK, file.size), res;
+  try {
+    res = DEMO ? await demoDirect(url, pos, end, file.size)
+      : await fetch(url, { method: 'PUT', headers: { 'Content-Range': 'bytes ' + pos + '-' + (end - 1) + '/' + file.size }, body: file.slice(pos, end) });
+  } catch (e) { var err = new Error('DIRECT: ' + msgOf(e)); err.direct = true; throw err; }
+  if (res.status === 308) {  // Drive: "send the next piece" (its Range header, when readable, says how much it has)
+    var m = /bytes=0-(\d+)/.exec((res.headers && res.headers.get('Range')) || '');
+    return { done: false, next: m ? Number(m[1]) + 1 : end };
+  }
+  if (res.status === 200 || res.status === 201) return { done: false, finished: true };
+  if (res.status === 404 || res.status === 410) throw new Error('EXPIRED: upload session ended');
+  var bad = new Error('DIRECT: Drive said ' + res.status); bad.direct = true; throw bad;
+}
+async function uploadOne(file, i) {
+  var restarts = 0, tries = 0, pos = 0, s;
+  function begin() {
+    return retry(function () { return server('startUpload', reqId, file.name, file.type, file.size, location.origin); })
+      .then(function (x) { return typeof x === 'string' ? { token: x } : x; });
+  }
+  s = await begin();
+  while (pos < file.size) {
+    if (cancel) throw new Error('skipped');
+    var r = null;
+    try {
+      if (s.url && direct) {
+        r = await putDirect(s.url, file, pos);
+        directFails = 0;
+        // Last piece arrived: the server confirms with Drive, logs the file in the Sheet and marks it done.
+        if (r.finished) r = await retry(function () { return server('uploadStatus', s.token); });
+      } else {
+        r = await server('uploadChunk', s.token, await readPiece(file, pos), pos);
+      }
+      tries = 0;
+    } catch (e) {
+      if (/TYPE|SIZE/.test(msgOf(e))) throw e;
+      if (e.direct && ++directFails >= 2) direct = false;   // the browser won't send straight to Drive: use the server route
+      if (!/EXPIRED/.test(msgOf(e))) {
+        if (!e.direct && tries >= BACKOFF.length) throw e;
+        if (!e.direct) await wait(BACKOFF[tries++]); else await wait(BACKOFF[0]);
+        // The piece may have arrived even though the answer didn't: ask Drive where it is before sending again.
+        try { r = await server('uploadStatus', s.token); } catch (e2) { if (!/EXPIRED/.test(msgOf(e2))) continue; e = e2; }
+      }
+      if (!r) {  // the upload session is gone: start this file once more from the beginning
+        if (restarts++ >= 1) throw e;
+        s = await begin(); pos = 0; progress(i, 0, file.size);
+        continue;
+      }
+    }
+    pos = r.done ? file.size : (typeof r.next === 'number' ? r.next : pos + CHUNK);
+    progress(i, pos, file.size);
+  }
+}
+async function uploadAll() {
+  state = 'uploading'; cancel = false; failed = []; render();
+  keepAwake();
+  totalBytes = files.reduce(function (s, f) { return s + f.size; }, 0); sentBytes = 0; upT0 = Date.now(); upB0 = 0;
+  for (var i = 0; i < files.length; i++) {
+    if (cancel) break;
+    try { await uploadOne(files[i], i); await dropFile(fileIds[i]); }
+    catch (e) { if (!cancel) failed.push(files[i].name); }
+    sentBytes += files[i].size;
+  }
+  try { if (wakeLock) wakeLock.release(); } catch (e) {}
+  finish();
+}
+function finish() { state = 'done'; setPending(false); dropAllFiles(); render(); focusHead(); }
+
+// ---------- thank you ----------
+function renderDone() {
+  var first = (a.name || '').trim().split(/\s+/)[0] || '';
+  var url = CFG.url, msg = t('shareText') + url;
+  var h = '<div class="prog"><i style="width:100%"></i></div><div class="fade done"><div class="big" aria-hidden="true">✓</div><h2 tabindex="-1" id="h">' +
+    esc(first ? t('thanksH').replace('{FIRST}', first) : t('thanksH0')) + '</h2><p class="sub">' + esc(t('thanks')) + '</p>' +
+    '<p><span class="rid">' + esc(t('ridL')) + ' ' + esc(reqId) + '</span></p><p class="sub" style="margin-top:12px">' + esc(t('closeOk')) + '</p>' +
+    (confirmedTo ? '<p class="sub" style="margin-top:12px">✉️ ' + esc(t('confirmSent').replace('{TO}', confirmedTo)) + '</p>' : '');
+  if (failed.length) h += '<div class="warn" role="alert">' + esc(fill(t('upFail')).replace('{FILES}', failed.join(', '))) + '</div>';
+  else if (skipped) h += '<div class="warn">' + esc(fill(t('skipped'))) + '</div>';
+  h += '<p style="margin:24px 0 0;font-weight:600;font-size:15px">' + esc(t('shareH')) + '</p><div class="share">' +
+    '<a class="btn wa" target="_blank" rel="noopener" href="https://wa.me/?text=' + encodeURIComponent(msg) + '">WhatsApp</a>' +
+    '<a class="btn vb" target="_blank" rel="noopener" href="viber://forward?text=' + encodeURIComponent(msg) + '">Viber</a>' +
+    '<button type="button" class="btn ghost" id="cp">' + t('copy') + '</button></div><div class="link" id="sl">' + esc(url) + '</div>';
+  if (DEMO) h += demoSheet();
+  document.getElementById('card').innerHTML = h + '</div>';
+  document.getElementById('cp').onclick = copyLink;
+}
+function copyLink() {
+  var b = document.getElementById('cp'), url = CFG.url, ok = false;
+  var ta = document.createElement('textarea'); ta.value = url; ta.setAttribute('readonly', ''); ta.style.position = 'fixed'; ta.style.opacity = '0';
+  document.body.appendChild(ta); ta.select();
+  try { ok = document.execCommand('copy'); } catch (e) {}
+  document.body.removeChild(ta);
+  if (ok) { b.textContent = t('copied'); return; }
+  if (navigator.clipboard) navigator.clipboard.writeText(url).then(function () { b.textContent = t('copied'); }, showManual);
+  else showManual();
+  function showManual() {
+    var r = document.createRange(), el = document.getElementById('sl'); r.selectNodeContents(el);
+    var s = window.getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent = t('copyFail');
+  }
+}
+
+// ---------- page setup ----------
+document.querySelectorAll('.lang button').forEach(function (b) { b.onclick = function () { if (b.disabled) return; lang = b.dataset.l; if (state === 'form') saveDraft(); render(); }; });
+document.getElementById('owner').textContent = CFG.name;
+(function () {
+  var av = document.getElementById('av');
+  if (CFG.photo && /^https:\/\//.test(CFG.photo)) av.outerHTML = '<img class="av" alt="" src="' + esc(CFG.photo) + '">';
+  else { av.className = 'av'; av.textContent = (CFG.name.replace(/[^A-Za-zÀ-ž]/g, '')[0] || '•').toUpperCase(); }
+})();
+window.addEventListener('beforeunload', function (e) { if (dirty()) { e.preventDefault(); e.returnValue = t('leave'); return t('leave'); } });
+
+// ---------- demo mode (file opened from disk): fake server, nothing leaves the laptop ----------
+var demoLog = { rows: [], chunks: [], flaky: false, shortRange: false, loseReply: 0, nonces: {} };
+var demoSessions = {};
+// Fake "straight to Drive": demoLog.blockDirect simulates a browser that refuses the direct route.
+async function demoDirect(url, pos, end, size) {
+  await wait(20);
+  if (demoLog.blockDirect) throw new TypeError('Failed to fetch');
+  var sess = demoSessions[url.replace('demo-direct:', '')];
+  if (pos !== sess.have) return { status: 400 };
+  sess.have = end; demoLog.direct = (demoLog.direct || 0) + 1; demoLog.chunks.push(pos + '+' + (end - pos));
+  return sess.have >= size ? { status: 200 } : { status: 308, headers: { get: function () { return 'bytes=0-' + (sess.have - 1); } } };
+}
+var demoServer = (function () {
+  var sessions = demoSessions;
+  function runner(ok, fail) {
+    return {
+      withSuccessHandler: function (f) { return runner(f, fail); },
+      withFailureHandler: function (f) { return runner(ok, f); },
+      submit: function (d) { setTimeout(function () { if (d.nonce && demoLog.nonces[d.nonce]) return ok({ id: demoLog.nonces[d.nonce] }); demoLog.rows.push(d); demoLog.nonces[d.nonce] = '261006-DEMO'; ok({ id: '261006-DEMO', confirmed: /@/.test(d.contact) }); }, 300); },
+      uploadStatus: function (tok) { setTimeout(function () { var s = sessions[tok]; demoLog.status = (demoLog.status || 0) + 1; ok(s.have >= s.size ? { done: true } : { done: false, next: s.have }); }, 40); },
+      startUpload: function (id, name, mime, size, origin) { setTimeout(function () { sessions['tok-' + name] = { size: size, have: 0 }; ok({ token: 'tok-' + name, url: demoLog.noDirectUrl ? null : 'demo-direct:tok-' + name }); }, 100); },
+      uploadChunk: function (tok, b64, start) {
+        setTimeout(function () {
+          var s = sessions[tok], n = Math.floor(b64.length * 3 / 4) - (/==$/.test(b64) ? 2 : /=$/.test(b64) ? 1 : 0);
+          if (demoLog.flaky) { demoLog.flaky = false; return fail(new Error('network glitch')); }   // one transient failure
+          if (s.have >= s.size) return ok({ done: true });                       // finished earlier: same as the real server
+          if (start !== s.have) return fail(new Error('wrong offset ' + start + ' vs ' + s.have));
+          if (demoLog.shortRange && n > 128 * 1024) { demoLog.shortRange = false; n = 128 * 1024; }  // Drive keeps less than sent, once
+          demoLog.chunks.push(start + '+' + n);
+          s.have = start + n;
+          if (demoLog.loseReply && demoLog.chunks.length === demoLog.loseReply) { demoLog.loseReply = 0; return fail(new Error('reply lost')); }  // stored, answer lost
+          ok(s.have >= s.size ? { done: true } : { done: false, next: s.have });
+        }, 40);
+      }
+    };
+  }
+  return runner(function () {}, function () {});
+})();
+function demoSheet() {
+  var d = demoLog.rows[demoLog.rows.length - 1] || {}, rows = '';
+  Object.keys(d).forEach(function (k) { if (d[k] !== '' && d[k] !== false && k !== 'hp_extra') rows += '<tr><td>' + esc(k) + '</td><td>' + esc(d[k]) + '</td></tr>'; });
+  return '<div class="sheet"><b>Demo only: the row that lands in your Google Sheet</b> (+ ' + (files.length - failed.length) + ' file(s) into a Drive folder named after the request number)<table>' + rows + '</table></div>';
+}
+if (DEMO) document.getElementById('demobar').innerHTML = '<div class="demo">DEMO on your laptop · nothing is sent anywhere</div>';
+
+// Start: finish an upload a reload interrupted, else restore the draft and any picked files.
+async function boot() {
+  var pend = null;
+  try { pend = JSON.parse(localStorage.getItem(PENDING) || 'null'); } catch (e) {}
+  if (pend && Date.now() - pend.t < 20 * 3600 * 1000 && await restoreFiles()) {
+    reqId = pend.id; a.name = pend.name; resumed = true;
+    return uploadAll();
+  }
+  if (pend) { setPending(false); files = []; fileIds = []; await dropAllFiles(); }
+  loadDraft(); render();
+  if (await restoreFiles()) { if (step > 0) restored = true; render(); }
+}
+if (DEMO && location.hash === '#selftest') render(); else boot();
+</script>
+<script>
+// Self-check (demo only): open form.html#selftest. Result goes into the tab title.
+if (DEMO && location.hash === '#selftest') (async function () {
+  var out = [];
+  out.push = function (x) { Array.prototype.push.call(out, x); document.title = 'PROGRESS ' + out.join(' | '); };   // shows where a stuck run stopped
+  CHUNK = 256 * 1024;
+  BACKOFF = [10, 10, 10, 10];
+  function reset() { a = { tools: [], budget: [] }; files = []; fileIds = []; resumed = false; step = 0; state = 'form'; reqId = null; failed = []; skipped = false; cancel = false; demoLog.chunks = []; err = ''; render(); }
+  async function until(f) { for (var i = 0; i < 4000 && !f(); i++) await wait(25); return f(); }
+  // Draft round trip: answers typed so far come back after a reload.
+  reset(); a.steps = 'draft text'; a.often = 'daily'; step = 3; saveDraft();
+  a = { tools: [], budget: [] }; step = 0; loadDraft();
+  var draftOk = a.steps === 'draft text' && a.often === 'daily' && step === 3 && restored;
+  clearDraft(); a = { tools: [], budget: [] }; step = 0; loadDraft();
+  draftOk = draftOk && !a.steps;
+  out.push('draft=' + draftOk);
+  // Picked files come back after a reload; removing one removes it from storage too.
+  reset(); await dropAllFiles();
+  addFiles([new File([new Uint8Array(1000)], 'a.jpg', { type: 'image/jpeg' }), new File([new Uint8Array(2000)], 'b.pdf', { type: 'application/pdf' })]);
+  await idbQueue;
+  files = []; fileIds = [];
+  var kept = await restoreFiles();
+  var keptOk = kept === 2 && files[0].name === 'a.jpg' && files[1].size === 2000;
+  step = 2; a.path = 'fix'; render(); document.querySelector('[data-rm="1"]').click(); await idbQueue;
+  files = []; fileIds = []; keptOk = keptOk && (await restoreFiles()) === 1;
+  out.push('filesKept=' + keptOk);
+  // Mixed types in several rounds, with back/forward, a path switch, a reload and a re-picked duplicate in between.
+  reset(); await dropAllFiles();
+  function mk(n, size, type) { return new File([new Uint8Array(size)], n, { type: type, lastModified: 1700000000000 + size }); }
+  a.path = 'fix'; step = 2; render();
+  addFiles([mk('racun.jpg', 1500, 'image/jpeg'), mk('posnetek.mp4', 300000, 'video/mp4'), mk('cenik.pdf', 2500, 'application/pdf')]);
+  go(-1); go(1);                                                           // back to "what do you need", forward again
+  var listed = document.querySelectorAll('#flist li').length === 3;
+  document.getElementById('voice').accept === 'audio/*' && addFiles([mk('glas.m4a', 4000, 'audio/mp4')]);   // voice message
+  go(1); go(1); go(-1); go(-1);                                            // to "value" and back to the problem
+  addFiles([mk('skladisce.png', 5000, 'image/png'), mk('linija.mov', 400000, 'video/quicktime')]);
+  addFiles([mk('racun.jpg', 1500, 'image/jpeg')]);                         // same photo picked again
+  await idbQueue;
+  var inMemory = files.map(function (f) { return f.name; }).join(',');
+  files = []; fileIds = []; await restoreFiles();                          // reload
+  var afterReload = files.map(function (f) { return f.name; }).join(',');
+  addFiles([mk('cenik.pdf', 2500, 'application/pdf')]);                    // re-picked after the reload: still no duplicate
+  step = 1; render(); a.path = 'idea'; go(1);                              // switch to the idea path
+  var onIdea = document.querySelectorAll('#flist li, #vlist li').length;
+  var want = 'racun.jpg,posnetek.mp4,cenik.pdf,glas.m4a,skladisce.png,linija.mov';
+  out.push('mixed=' + (listed && inMemory === want && afterReload === want && files.length === 6 && onIdea === 6));
+  // ... and all six upload after Send, each complete, storage empty afterwards.
+  a.ideaWhat = 'x'; a.name = 'Mix'; a.contact = 'mix@example.com'; a.privacy = true; demoLog.chunks = []; render();
+  for (var g = 0; g < 12 && flow()[step] !== 'about'; g++) go(1);
+  render(); go(1);
+  await until(function () { return state === 'done'; });
+  var sent = demoLog.chunks.reduce(function (t, c) { return t + Number(c.split('+')[1]); }, 0);
+  var mixRow = demoLog.rows[demoLog.rows.length - 1];
+  var confirmOk = mixRow.fileNames.length === 6 && mixRow.summary.some(function (r) { return r[1] === 'x'; }) &&
+    document.getElementById('card').textContent.indexOf('mix@example.com') > -1;
+  out.push('confirmation=' + confirmOk);
+  out.push('mixedUpload=' + (failed.length === 0 && sent === 1500 + 300000 + 2500 + 4000 + 5000 + 400000 && (await restoreFiles()) === 0));
+  // Dictation that never fires an input event still ends up in the answers.
+  reset(); a.path = 'fix'; step = 2; render();
+  document.getElementById('q_steps').value = 'narekovano besedilo';         // no input event, like some keyboards
+  go(1);
+  out.push('dictation=' + (a.steps === 'narekovano besedilo' && flow()[step] === 'time'));
+  // Voice message recorded in the page (test browser has a fake microphone); it replaces the written description.
+  reset(); await dropAllFiles(); a.path = 'fix'; step = 2; render();
+  var canRec = canMic();
+  document.getElementById('rec').click();
+  await until(function () { return !!recState; });
+  await wait(1500);
+  var timerShown = /0:0[1-9]/.test(document.getElementById('rec').textContent);
+  document.getElementById('rec').click();
+  await until(function () { return !recState && files.length === 1; });
+  var vf = files[0] || {};
+  var played = !!document.querySelector('#vlist audio') && !document.querySelector('#flist audio');
+  go(1);                                                                   // no text written: the voice message is enough
+  var voiceOk = canRec && timerShown && /^(glasovno-sporocilo|voice-message)-1-0m0[1-9]s\.(webm|m4a|ogg)$/.test(vf.name) && vf.size > 0 && played && flow()[step] === 'time' && payload().steps === t('voiceOnly');
+  out.push('voiceRecord=' + voiceOk);
+  // Microphone refused (or an app's built-in browser without one): a fallback to tap, never settings instructions.
+  reset(); await dropAllFiles(); a.path = 'fix'; step = 2; render();
+  var gum = navigator.mediaDevices.getUserMedia;
+  navigator.mediaDevices.getUserMedia = function () { return Promise.reject(new Error('NotAllowedError')); };
+  document.getElementById('rec').click();
+  await until(function () { return !!document.querySelector('#recerr .warn'); });
+  navigator.mediaDevices.getUserMedia = gum;
+  var fb = document.querySelector('#recerr .warn').textContent;
+  out.push('voiceFallback=' + (!recState && fb.indexOf(t('recType')) >= 0 && !/Settings|Nastavitve|Allow|Dovoli/.test(fb)));
+  // The page reloads mid-upload: on start it uploads the remaining file by itself and cleans up.
+  await dropAllFiles(); keepFile('r1', mk('ostanek.jpg', 3000, 'image/jpeg')); await idbQueue;   // one file still waiting
+  reqId = '261006-DEMO'; a.name = 'Test'; setPending(true);
+  a = { tools: [], budget: [] }; files = []; fileIds = []; state = 'form'; demoLog.chunks = [];
+  boot();
+  await until(function () { return state === 'done'; });
+  var left = await restoreFiles(), pendLeft = localStorage.getItem(PENDING);
+  out.push('resume=' + (resumed && demoLog.chunks.length === 1 && left === 0 && !pendLeft));
+  // Fast route: the file goes straight to (fake) Drive in 8 MB pieces; the server only confirms the end.
+  async function sendOne(name, size, block) {
+    reset(); demoLog.noDirectUrl = false; demoLog.blockDirect = block; demoLog.direct = 0; demoLog.status = 0; direct = true; directFails = 0;
+    DCHUNK = 512 * 1024; CHUNK = 256 * 1024;
+    reqId = '261006-DEMO'; files = [new File([new Uint8Array(size)], name, { type: 'video/mp4' })]; fileIds = [];
+    uploadAll();
+    await until(function () { return state === 'done'; });
+    return demoLog.chunks.reduce(function (t, c) { return t + Number(c.split('+')[1]); }, 0);
+  }
+  var bytesFast = await sendOne('fast.mp4', 1300 * 1024, false);
+  out.push('directRoute=' + (bytesFast === 1300 * 1024 && demoLog.direct === 3 && failed.length === 0 && demoLog.status === 1));
+  var bytesBlocked = await sendOne('blocked.mp4', 700 * 1024, true);
+  out.push('directBlockedFallsBack=' + (bytesBlocked === 700 * 1024 && demoLog.direct === 0 && !direct && failed.length === 0));
+  demoLog.blockDirect = false; demoLog.noDirectUrl = false; DCHUNK = 8 * 1024 * 1024;
+  for (var p of ['fix', 'idea']) {
+    reset();
+    var seen = [];
+    go(1); seen.push(flow()[step]);
+    go(1); var pathBlocks = flow()[step] === 'path';
+    a.path = p; go(1); seen.push(flow()[step]);
+    var pickerHere = !!document.getElementById('picker');                      // picker sits on the problem/idea step
+    go(1); var reqBlocks = step === 2;
+    a.steps = 'x'; a.ideaWhat = 'y'; a.often = 'weekly'; a.tools = ['paper'];
+    lang = 'en'; render(); lang = 'sl'; render();               // switching language keeps keys
+    var ownOk = true, pickerOk = pickerHere;
+    for (var g2 = 0; g2 < 12 && flow()[step] !== 'about'; g2++) {
+      go(1); seen.push(flow()[step]);
+      if (document.getElementById('picker')) pickerOk = false;                  // and nowhere else
+      if (flow()[step] === 'time') {
+        a.hours = 'h5'; render();
+        var hi = document.querySelector('[data-own="hours"]'); hi.value = '12'; hi.dispatchEvent(new Event('input'));
+        ownOk = a.hours === '' && !document.querySelector('[data-chip="hours"].on');
+        var ti = document.querySelector('[data-own="tools"]'); ti.value = 'Pantheon'; ti.dispatchEvent(new Event('input'));
+        document.querySelector('[data-chip="cost"][data-v="c15"]').click();
+      }
+      if (flow()[step] === 'value') {
+        var wi = document.querySelector('[data-own="worth"]'); wi.value = '15.000 €'; wi.dispatchEvent(new Event('input'));
+        document.querySelector('[data-chip="budget"][data-v="bs"]').click();
+        var bi = document.querySelector('[data-own="budget"]'); bi.value = '10 %'; bi.dispatchEvent(new Event('input'));
+        document.querySelector('[data-chip="worth"][data-v="w2"]').click();   // a chip tap clears the typed answer again
+        ownOk = ownOk && a.worth === 'w2' && !a.worth_own && wi.value === '';
+        wi.value = '15.000 €'; wi.dispatchEvent(new Event('input'));            // and typing wins again
+        ownOk = ownOk && a.worth === '' && a.worth_own === '15.000 €';
+      }
+    }
+    a.name = 'Test Person'; a.privacy = true; a.contact = 'asdf'; render(); go(1); var badContact = state === 'form' && !sending;
+    a.privacy = false; a.contact = '040 123 456'; render(); go(1); var privBlocks = state === 'form' && !sending;
+    files = [new File([new Uint8Array(600 * 1024)], 'test.mp4', { type: 'video/mp4' })];   // picked earlier, on the problem step
+    demoLog.status = 0;
+    demoLog.noDirectUrl = true; direct = true;                                                     // these two runs test the server route
+    if (p === 'fix') { demoLog.flaky = true; demoLog.shortRange = true; demoLog.loseReply = 2; }  // glitch, short write, lost reply mid-file
+    else demoLog.loseReply = 3;                                                                   // lost reply on the last piece
+    a.privacy = true; render(); go(1);                                                            // Send: answers, then the file by itself
+    await until(function () { return state === 'done'; });
+    var row = demoLog.rows[demoLog.rows.length - 1], nRows = demoLog.rows.length;
+    var again = await server('submit', payload());                              // Send retried after a lost reply
+    var noDup = demoLog.rows.length === nRows && again.id === reqId;
+    var sum = demoLog.chunks.reduce(function (t, c) { return t + Number(c.split('+')[1]); }, 0);
+    out.push(p + ':' + seen.join('>') + ':blocks=' + [pathBlocks, reqBlocks, badContact, privBlocks].join(',') +
+      ':picker=' + pickerOk + ':own=' + ownOk + ':hours=' + row.hours + ':cost=' + row.cost + ':worth=' + row.worth + ':budget=' + row.budget + ':often=' + row.often + ':tools=' + row.tools + ':steps=' + (row.steps ? 'Y' : 'N') + ':idea=' + (row.ideaWhat ? 'Y' : 'N') +
+      ':chunks=' + demoLog.chunks.join(',') + ':bytes=' + sum + ':status=' + demoLog.status + ':noDup=' + noDup + ':failed=' + failed.length + ':done=' + !!document.querySelector('.done'));
+  }
+  document.title = 'SELFTEST ' + out.join(' | ');
+})();
+</script>
+</body>
+</html>
