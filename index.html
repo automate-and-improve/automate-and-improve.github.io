@@ -216,7 +216,7 @@ var T = {
     privacy: 'Strinjam se, da {NAME} moje odgovore in datoteke shrani v svoj Google Drive in jih uporabi samo za odgovor na to povpraševanje (pri pregledu si pomaga tudi z orodjem umetne inteligence). Hrani jih največ 12 mesecev, na zahtevo ({EMAIL}) jih izbriše prej.',
     savedH: 'Odgovori so shranjeni ✓', savedS: 'Zdaj se nalagajo vaše datoteke.',
     filesL: 'Fotografije (neobvezno)', filesHint: 'Če kaj pomaga razumeti: fotografija ali posnetek zaslona (video ali dokument raje opišite v glasovnem sporočilu). Naložijo se, ko pošljete odgovore.',
-    voice: 'Glasovno sporočilo', voiceS: 'posnemite ali izberite posnetek',
+
     recBig: 'Raje povejte? Posnemite glasovno sporočilo', recTap: 'Tapnite za začetek snemanja',
     recOn: 'Snemam … tapnite za konec', recQuiet: 'Ne slišim vas: govorite bližje mikrofonu', recSilent: 'Posnetek je tih, nisem slišal ničesar. Morda je izbran napačen mikrofon. Poskusite znova ali na kratko napišite spodaj.', recName: 'glasovno-sporocilo', recFail: 'Snemanje tukaj ne deluje. Nič hudega:', recPhone: '🎙️ Odprite snemalnik telefona', recType: 'Ali pa na kratko napišite spodaj.', recApp: 'Namig: če stran odprete v Safariju ali Chromu (meni ⋯ → Odpri v brskalniku), lahko snemate kar tukaj.',
     reqOrVoice: 'Napišite nekaj besed ali posnemite glasovno sporočilo.', voiceOnly: '[glasovno sporočilo]',
@@ -276,7 +276,7 @@ var T = {
     privacy: 'I agree that {NAME} stores my answers and files in their Google Drive and uses them only to reply to this request (with help from an AI tool when reviewing). They are kept for at most 12 months and deleted sooner on request ({EMAIL}).',
     savedH: 'Your answers are saved ✓', savedS: 'Now uploading your files.',
     filesL: 'Photos (optional)', filesHint: 'Anything that helps explain it: a photo or a screenshot (describe a video or document in a voice message instead). They upload when you send your answers.',
-    voice: 'Voice message', voiceS: 'record or pick a recording',
+
     recBig: 'Rather say it? Record a voice message', recTap: 'Tap to start recording',
     recOn: 'Recording … tap to stop', recQuiet: "I can't hear you: speak closer to the microphone", recSilent: 'This recording is silent, I heard nothing. Maybe the wrong microphone is in use. Try again, or just type a few lines below.', recName: 'voice-message', recFail: "Recording doesn't work here. No problem:", recPhone: "🎙️ Open your phone's recorder", recType: 'Or just type a few lines below.', recApp: 'Tip: open this page in Safari or Chrome (menu ⋯ → Open in browser) to record right here.',
     reqOrVoice: 'Write a few words or record a voice message.', voiceOnly: '[voice message]',
@@ -426,8 +426,9 @@ async function toggleRecord() {
   catch (e) { try { if (ac) ac.close(); } catch (e2) {} return recFallback(); }   // refused, or the browser (an app's built-in one) has no microphone
   var types = ['audio/webm;codecs=opus', 'audio/mp4', 'audio/webm', 'audio/ogg'];
   var mime = types.filter(function (m) { return window.MediaRecorder.isTypeSupported && MediaRecorder.isTypeSupported(m); })[0];
-  // 32 kbit/s is plenty for speech (transcription included): 15 minutes = ~3.6 MB, a few seconds to send.
-  var rec, chunks = [], opts = { audioBitsPerSecond: 32000 };
+  // 64 kbit/s: measured 2026-10-08 (review/eval_edge.py), Slovenian transcription is as good as the original (22.9% vs 22.6%
+  // words wrong; 32 kbit/s cost 8 points). 15 minutes = ~7 MB, about 10 s to send on a phone.
+  var rec, chunks = [], opts = { audioBitsPerSecond: 64000 };
   if (mime) opts.mimeType = mime;
   try { rec = new MediaRecorder(stream, opts); } catch (e) { rec = mime ? new MediaRecorder(stream, { mimeType: mime }) : new MediaRecorder(stream); }
   rec.ondataavailable = function (e) { if (e.data && e.data.size) chunks.push(e.data); };
@@ -1052,7 +1053,7 @@ if (DEMO && location.hash === '#selftest') (async function () {
   var voiceOk = canRec && timerShown && /^(glasovno-sporocilo|voice-message)-1-0m0[1-9]s\.(webm|m4a|ogg)$/.test(vf.name) && vf.size > 0 && played && flow()[step] === 'time' && payload().steps === t('voiceOnly');
   out.push('voiceRecord=' + voiceOk);
   out.push('voiceBars=' + (barsMove && !document.querySelector('#recerr .warn')));
-  out.push('voiceSmall=' + (vf.size > 0 && vf.size < 15000) + ':' + vf.size);   // 32 kbit/s: ~2 s of speech is a few KB
+  out.push('voiceSmall=' + (vf.size > 0 && vf.size < 40000) + ':' + vf.size);   // 64 kbit/s: ~2 s of speech is ~16 KB
   // A muted / wrong microphone gives silence: the page says so (bars stay flat, warning after the recording).
   reset(); await dropAllFiles(); a.path = 'fix'; step = 2; render();
   var gum0 = navigator.mediaDevices.getUserMedia, sctx = new (window.AudioContext || window.webkitAudioContext)();
