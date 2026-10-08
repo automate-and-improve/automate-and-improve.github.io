@@ -220,7 +220,7 @@ var T = {
     keepOpen: 'Med nalaganjem ne zaklepajte zaslona in ne zapirajte strani.',
     upload: 'Naloži in zaključi', noFiles: 'Zaključi brez datotek', uploading: 'Nalagam ...', skip: 'Preskoči preostale',
     tooBig: '{F}: datoteka je večja od {MB} MB.', tooMany: 'Največ {N} datotek ali 1 GB skupaj.', badType: '{F}: te vrste datoteke ne sprejemam.',
-    total: 'Naloženo {P} %', left: 'še približno {T}', min: '{N} min', lessMin: 'manj kot minuta',
+    total: 'Naloženo {P} %', left: 'še približno {N} min', leftLess: 'še manj kot minuta',
     thanksH: 'Hvala, {FIRST}!', thanksH0: 'Hvala!', closeOk: 'To je vse. Stran lahko zdaj zaprete.',
     thanks: 'V 7 dneh se oglasim z enim od treh odgovorov: z načrtom in ceno (zagon + mesečno), z brezplačnim nasvetom, ki ga lahko uporabite sami, ali z iskrenim »to ni zame« in namigom, kam se obrniti.',
     ridL: 'Številka povpraševanja:',
@@ -280,7 +280,7 @@ var T = {
     keepOpen: "Please keep the screen on and this page open while uploading.",
     upload: 'Upload and finish', noFiles: 'Finish without files', uploading: 'Uploading...', skip: 'Skip the rest',
     tooBig: '{F}: larger than {MB} MB.', tooMany: 'At most {N} files or 1 GB in total.', badType: "{F}: this file type isn't accepted.",
-    total: '{P} % uploaded', left: 'about {T} left', min: '{N} min', lessMin: 'less than a minute',
+    total: '{P} % uploaded', left: 'about {N} min left', leftLess: 'less than a minute left',
     thanksH: 'Thank you, {FIRST}!', thanksH0: 'Thank you!', closeOk: "That's all. You can close this page now.",
     thanks: "I'll get back to you within 7 days with one of three answers: a plan with the setup and monthly price, a free tip you can use yourself, or an honest \"not for me\" with a pointer.",
     ridL: 'Request number:',
@@ -449,7 +449,7 @@ function hasVoice() { return files.some(function (f) { return /^audio\//.test(f.
 function filePicker() {
   return '<div class="f"><div class="l">' + esc(t('filesL')) + '</div><div class="hint">' + esc(t('filesHint')) + '</div>' +
     '<div class="drops one"><label class="drop" id="drop"><div class="big" aria-hidden="true">📎</div><b>' + t('drop') + '</b><small>' + fill(t('dropS')) + '</small>' +
-    '<input type="file" id="picker" multiple hidden accept="image/*,video/*,audio/*,.pdf,.doc,.docx,.xls,.xlsx,.csv,.ppt,.pptx,.txt,.odt,.ods,.rtf"></label></div>' +
+    '<input type="file" id="picker" multiple hidden accept="image/*,video/*,audio/*,.pdf,.docx,.xlsx,.csv,.pptx,.txt,.odt,.ods,.odp"></label></div>' +
     '<div id="ferr"></div><ul class="files" id="flist"></ul></div>';
 }
 function head(h, s) { return '<h2 tabindex="-1" id="h">' + t(h) + '</h2><p class="sub">' + t(s) + '</p>'; }
@@ -672,12 +672,15 @@ function wireFiles() {
   drop.ondragleave = function () { drop.classList.remove('over'); };
   drop.ondrop = function (e) { e.preventDefault(); drop.classList.remove('over'); addFiles(e.dataTransfer.files); };
 }
-var OK_TYPES = /\.(jpe?g|png|gif|webp|heic|heif|bmp|tiff?|mp4|mov|m4v|3gp|webm|avi|mkv|mp3|m4a|aac|wav|ogg|opus|amr|pdf|docx?|xlsx?|csv|pptx?|txt|odt|ods|odp|rtf)$/i;
+var OK_TYPES = /\.(jpe?g|png|gif|webp|heic|heif|bmp|tiff?|mp4|mov|m4v|3gp|webm|avi|mkv|mp3|m4a|aac|wav|ogg|opus|amr|pdf|docx|xlsx|csv|pptx|txt|odt|ods|odp)$/i;   // same list as Code.gs FILE_TYPES
 function addFiles(list) {
   var errs = [], total = files.reduce(function (s, f) { return s + f.size; }, 0);
   [].forEach.call(list, function (f) {
     if (!OK_TYPES.test(f.name) && !/^(image|video|audio)\/|^application\/pdf$/.test(f.type || '')) { errs.push(t('badType').replace('{F}', f.name)); return; }
     if (f.size > CFG.maxFile) { errs.push(fill(t('tooBig')).replace('{F}', f.name)); return; }
+    // Documents and photos max 100 MB (Drive virus-scans only up to ~100 MB); videos and audio up to maxFile.
+    var media = /^(video|audio)\//.test(f.type || '') || /\.(mp4|mov|m4v|3gp|webm|avi|mkv|mp3|m4a|aac|wav|ogg|opus|amr)$/i.test(f.name);
+    if (!media && f.size > 100 * 1048576) { errs.push(t('tooBig').replace('{MB}', 100).replace('{F}', f.name)); return; }
     if (files.length >= CFG.maxFiles || total + f.size > CFG.maxTotal) { var m = fill(t('tooMany')); if (errs.indexOf(m) < 0) errs.push(m); return; }
     var same = files.some(function (g) { return g.name === f.name && g.size === f.size && g.lastModified === f.lastModified; });
     if (same) return;
@@ -743,13 +746,19 @@ function progress(i, pos, size) {
   if (tp) tp.textContent = t('total').replace('{P}', p) + timeLeft(sentBytes + pos);
   if (tb) tb.style.width = p + '%';
 }
-// Time left from the speed so far (shown after a few seconds, once the speed means something).
-var upT0 = 0, upB0 = 0;
+// Time left from the speed of the last ~10 s (the first seconds are slow while Drive opens the upload,
+// which made a 1-minute upload say "171 min"). Hidden until there are 6 s of real data or if it looks absurd.
+var upT0 = 0, upSamples = [];
 function timeLeft(done) {
-  var sec = (Date.now() - upT0) / 1000, rate = (done - upB0) / sec;
-  if (!upT0 || sec < 4 || rate <= 0 || done >= totalBytes) return '';
+  var now = Date.now();
+  if (!upT0 || done >= totalBytes) return '';
+  upSamples.push([now, done]);
+  while (upSamples.length > 2 && now - upSamples[1][0] >= 10000) upSamples.shift();
+  var first = upSamples[0], sec = (now - first[0]) / 1000, rate = (done - first[1]) / sec;
+  if (now - upT0 < 6000 || sec < 3 || rate <= 0) return '';
   var m = Math.round((totalBytes - done) / rate / 60);
-  return ' · ' + t('left').replace('{T}', m < 1 ? t('lessMin') : t('min').replace('{N}', m));
+  if (m > 90) return '';
+  return ' · ' + (m < 1 ? t('leftLess') : t('left').replace('{N}', m));
 }
 var BACKOFF = [2000, 5000, 15000, 30000];
 // Two routes to Drive. Fast: the phone sends the file straight to a one-file upload address the server opened.
@@ -811,7 +820,7 @@ async function uploadOne(file, i) {
 async function uploadAll() {
   state = 'uploading'; cancel = false; failed = []; render();
   keepAwake();
-  totalBytes = files.reduce(function (s, f) { return s + f.size; }, 0); sentBytes = 0; upT0 = Date.now(); upB0 = 0;
+  totalBytes = files.reduce(function (s, f) { return s + f.size; }, 0); sentBytes = 0; upT0 = Date.now(); upSamples = [];
   for (var i = 0; i < files.length; i++) {
     if (cancel) break;
     try { await uploadOne(files[i], i); await dropFile(fileIds[i]); }
