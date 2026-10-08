@@ -220,7 +220,7 @@ var T = {
     recBig: 'Raje povejte? Posnemite glasovno sporočilo', recTap: 'Tapnite za začetek snemanja',
     recOn: 'Snemam … tapnite za konec', recQuiet: 'Ne slišim vas: govorite bližje mikrofonu', recSilent: 'Posnetek je tih, nisem slišal ničesar. Morda je izbran napačen mikrofon. Poskusite znova ali na kratko napišite spodaj.', recName: 'glasovno-sporocilo', recFail: 'Snemanje tukaj ne deluje. Nič hudega:', recPhone: '🎙️ Odprite snemalnik telefona', recType: 'Ali pa na kratko napišite spodaj.', recApp: 'Namig: če stran odprete v Safariju ali Chromu (meni ⋯ → Odpri v brskalniku), lahko snemate kar tukaj.',
     reqOrVoice: 'Napišite nekaj besed ali posnemite glasovno sporočilo.', voiceOnly: '[glasovno sporočilo]',
-    drop: 'Dodajte datoteke', dropS: 'do {N} datotek, vsaka do {MB} MB',
+    drop: 'Dodajte fotografije', dropS: 'ali posnetke zaslona, do {N}, vsaka do {MB} MB',
     keepOpen: 'Med nalaganjem ne zaklepajte zaslona in ne zapirajte strani.',
     upload: 'Naloži in zaključi', noFiles: 'Zaključi brez datotek', uploading: 'Nalagam ...', skip: 'Preskoči preostale',
     tooBig: '{F}: datoteka je večja od {MB} MB.', tooMany: 'Največ {N} datotek ali 500 MB skupaj.', badType: '{F}: sprejemam samo fotografije in glasovna sporočila. Video ali dokument raje opišite v glasovnem sporočilu ali ga fotografirajte.',
@@ -280,7 +280,7 @@ var T = {
     recBig: 'Rather say it? Record a voice message', recTap: 'Tap to start recording',
     recOn: 'Recording … tap to stop', recQuiet: "I can't hear you: speak closer to the microphone", recSilent: 'This recording is silent, I heard nothing. Maybe the wrong microphone is in use. Try again, or just type a few lines below.', recName: 'voice-message', recFail: "Recording doesn't work here. No problem:", recPhone: "🎙️ Open your phone's recorder", recType: 'Or just type a few lines below.', recApp: 'Tip: open this page in Safari or Chrome (menu ⋯ → Open in browser) to record right here.',
     reqOrVoice: 'Write a few words or record a voice message.', voiceOnly: '[voice message]',
-    drop: 'Add files', dropS: 'up to {N} files, {MB} MB each',
+    drop: 'Add photos', dropS: 'or screenshots, up to {N}, {MB} MB each',
     keepOpen: "Please keep the screen on and this page open while uploading.",
     upload: 'Upload and finish', noFiles: 'Finish without files', uploading: 'Uploading...', skip: 'Skip the rest',
     tooBig: '{F}: larger than {MB} MB.', tooMany: 'At most {N} files or 500 MB in total.', badType: '{F}: only photos and voice messages are accepted. Describe a video or document in a voice message, or send a photo of it.',
@@ -489,7 +489,7 @@ function hasVoice() { return files.some(function (f) { return /^audio\//.test(f.
 function filePicker() {
   return '<div class="f"><div class="l">' + esc(t('filesL')) + '</div><div class="hint">' + esc(t('filesHint')) + '</div>' +
     '<div class="drops one"><label class="drop" id="drop"><div class="big" aria-hidden="true">📎</div><b>' + t('drop') + '</b><small>' + fill(t('dropS')) + '</small>' +
-    '<input type="file" id="picker" multiple hidden accept="image/*,audio/*"></label></div>' +
+    '<input type="file" id="picker" multiple hidden accept="image/*"></label></div>' +
     '<div id="ferr"></div><ul class="files" id="flist"></ul></div>';
 }
 function head(h, s) { return '<h2 tabindex="-1" id="h">' + t(h) + '</h2><p class="sub">' + t(s) + '</p>'; }
