@@ -211,7 +211,7 @@ var T = {
     referrer: 'Kdo vam je poslal to povezavo?', referrerP: 'ime prijatelja ali znanca',
     privacy: 'Strinjam se, da {NAME} moje odgovore in datoteke shrani v svoj Google Drive in jih uporabi samo za odgovor na to povpraševanje (pri pregledu si pomaga tudi z orodjem umetne inteligence). Hrani jih največ 12 mesecev, na zahtevo ({EMAIL}) jih izbriše prej.',
     savedH: 'Odgovori so shranjeni ✓', savedS: 'Zdaj se nalagajo vaše datoteke.',
-    filesL: 'Slike, dokumenti ali video (neobvezno)', filesHint: 'Če kaj pomaga razumeti: fotografija, tabela, kratek video. Naložijo se, ko pošljete odgovore.',
+    filesL: 'Fotografije ali video (neobvezno)', filesHint: 'Če kaj pomaga razumeti: fotografija, posnetek zaslona, kratek video. Naložijo se, ko pošljete odgovore.',
     voice: 'Glasovno sporočilo', voiceS: 'posnemite ali izberite posnetek',
     recBig: 'Raje povejte? Posnemite glasovno sporočilo', recTap: 'Tapnite za začetek snemanja',
     recOn: 'Snemam … tapnite za konec', recName: 'glasovno-sporocilo', recFail: 'Snemanje tukaj ne deluje. Nič hudega:', recVideo: '🎥 Posnemite kratek video (kar govorite)', recPhone: '🎙️ Odprite snemalnik telefona', recType: 'Ali pa na kratko napišite spodaj.', recApp: 'Namig: če stran odprete v Safariju ali Chromu (meni ⋯ → Odpri v brskalniku), lahko snemate kar tukaj.',
@@ -219,7 +219,7 @@ var T = {
     drop: 'Dodajte datoteke', dropS: 'do {N} datotek, vsaka do {MB} MB',
     keepOpen: 'Med nalaganjem ne zaklepajte zaslona in ne zapirajte strani.',
     upload: 'Naloži in zaključi', noFiles: 'Zaključi brez datotek', uploading: 'Nalagam ...', skip: 'Preskoči preostale',
-    tooBig: '{F}: datoteka je večja od {MB} MB.', tooMany: 'Največ {N} datotek ali 1 GB skupaj.', badType: '{F}: te vrste datoteke ne sprejemam.',
+    tooBig: '{F}: datoteka je večja od {MB} MB.', tooMany: 'Največ {N} datotek ali 1 GB skupaj.', badType: '{F}: sprejemam samo fotografije, video in glasovna sporočila. Dokument raje fotografirajte ali naredite posnetek zaslona.',
     total: 'Naloženo {P} %', left: 'še približno {N} min', leftLess: 'še manj kot minuta',
     thanksH: 'Hvala, {FIRST}!', thanksH0: 'Hvala!', closeOk: 'To je vse. Stran lahko zdaj zaprete.',
     thanks: 'V 7 dneh se oglasim z enim od treh odgovorov: z načrtom in ceno (zagon + mesečno), z brezplačnim nasvetom, ki ga lahko uporabite sami, ali z iskrenim »to ni zame« in namigom, kam se obrniti.',
@@ -271,7 +271,7 @@ var T = {
     referrer: 'Who sent you this link?', referrerP: "a friend's name",
     privacy: 'I agree that {NAME} stores my answers and files in their Google Drive and uses them only to reply to this request (with help from an AI tool when reviewing). They are kept for at most 12 months and deleted sooner on request ({EMAIL}).',
     savedH: 'Your answers are saved ✓', savedS: 'Now uploading your files.',
-    filesL: 'Photos, documents or video (optional)', filesHint: 'Anything that helps explain it: a photo, a spreadsheet, a short video. They upload when you send your answers.',
+    filesL: 'Photos or video (optional)', filesHint: 'Anything that helps explain it: a photo, a screenshot, a short video. They upload when you send your answers.',
     voice: 'Voice message', voiceS: 'record or pick a recording',
     recBig: 'Rather say it? Record a voice message', recTap: 'Tap to start recording',
     recOn: 'Recording … tap to stop', recName: 'voice-message', recFail: "Recording doesn't work here. No problem:", recVideo: '🎥 Record a short video instead (just talk)', recPhone: "🎙️ Open your phone's recorder", recType: 'Or just type a few lines below.', recApp: 'Tip: open this page in Safari or Chrome (menu ⋯ → Open in browser) to record right here.',
@@ -279,7 +279,7 @@ var T = {
     drop: 'Add files', dropS: 'up to {N} files, {MB} MB each',
     keepOpen: "Please keep the screen on and this page open while uploading.",
     upload: 'Upload and finish', noFiles: 'Finish without files', uploading: 'Uploading...', skip: 'Skip the rest',
-    tooBig: '{F}: larger than {MB} MB.', tooMany: 'At most {N} files or 1 GB in total.', badType: "{F}: this file type isn't accepted.",
+    tooBig: '{F}: larger than {MB} MB.', tooMany: 'At most {N} files or 1 GB in total.', badType: '{F}: only photos, videos and voice messages are accepted. For a document, send a photo or screenshot of it.',
     total: '{P} % uploaded', left: 'about {N} min left', leftLess: 'less than a minute left',
     thanksH: 'Thank you, {FIRST}!', thanksH0: 'Thank you!', closeOk: "That's all. You can close this page now.",
     thanks: "I'll get back to you within 7 days with one of three answers: a plan with the setup and monthly price, a free tip you can use yourself, or an honest \"not for me\" with a pointer.",
@@ -449,7 +449,7 @@ function hasVoice() { return files.some(function (f) { return /^audio\//.test(f.
 function filePicker() {
   return '<div class="f"><div class="l">' + esc(t('filesL')) + '</div><div class="hint">' + esc(t('filesHint')) + '</div>' +
     '<div class="drops one"><label class="drop" id="drop"><div class="big" aria-hidden="true">📎</div><b>' + t('drop') + '</b><small>' + fill(t('dropS')) + '</small>' +
-    '<input type="file" id="picker" multiple hidden accept="image/*,video/*,audio/*,.pdf,.docx,.xlsx,.csv,.pptx,.txt,.odt,.ods,.odp"></label></div>' +
+    '<input type="file" id="picker" multiple hidden accept="image/*,video/*,audio/*"></label></div>' +
     '<div id="ferr"></div><ul class="files" id="flist"></ul></div>';
 }
 function head(h, s) { return '<h2 tabindex="-1" id="h">' + t(h) + '</h2><p class="sub">' + t(s) + '</p>'; }
@@ -672,14 +672,16 @@ function wireFiles() {
   drop.ondragleave = function () { drop.classList.remove('over'); };
   drop.ondrop = function (e) { e.preventDefault(); drop.classList.remove('over'); addFiles(e.dataTransfer.files); };
 }
-var OK_TYPES = /\.(jpe?g|png|gif|webp|heic|heif|bmp|tiff?|mp4|mov|m4v|3gp|webm|avi|mkv|mp3|m4a|aac|wav|ogg|opus|amr|pdf|docx|xlsx|csv|pptx|txt|odt|ods|odp)$/i;   // same list as Code.gs FILE_TYPES
+// Photos, video and voice only (same list as Code.gs FILE_TYPES); anything else is refused the moment it's picked.
+var OK_TYPES = /\.(jpe?g|png|gif|webp|heic|heif|mp4|mov|m4v|3gp|webm|mp3|m4a|aac|wav|ogg|opus|amr)$/i;
+var NO_EXT_OK = /^(image\/(jpeg|png|gif|webp|heic|heif)|video\/(mp4|quicktime|3gpp|webm)|audio\/(webm|mpeg|mp4|aac|ogg|amr))$/;   // some Android pickers drop the extension
 function addFiles(list) {
   var errs = [], total = files.reduce(function (s, f) { return s + f.size; }, 0);
   [].forEach.call(list, function (f) {
-    if (!OK_TYPES.test(f.name) && !/^(image|video|audio)\/|^application\/pdf$/.test(f.type || '')) { errs.push(t('badType').replace('{F}', f.name)); return; }
+    if (!OK_TYPES.test(f.name) && !(!/\.[a-z0-9]{2,5}$/i.test(f.name) && NO_EXT_OK.test(f.type || ''))) { errs.push(t('badType').replace('{F}', f.name)); return; }
     if (f.size > CFG.maxFile) { errs.push(fill(t('tooBig')).replace('{F}', f.name)); return; }
-    // Documents and photos max 100 MB (Drive virus-scans only up to ~100 MB); videos and audio up to maxFile.
-    var media = /^(video|audio)\//.test(f.type || '') || /\.(mp4|mov|m4v|3gp|webm|avi|mkv|mp3|m4a|aac|wav|ogg|opus|amr)$/i.test(f.name);
+    // Photos max 100 MB (Drive virus-scans only up to ~100 MB); videos and audio up to maxFile.
+    var media = /^(video|audio)\//.test(f.type || '') || /\.(mp4|mov|m4v|3gp|webm|mp3|m4a|aac|wav|ogg|opus|amr)$/i.test(f.name);
     if (!media && f.size > 100 * 1048576) { errs.push(t('tooBig').replace('{MB}', 100).replace('{F}', f.name)); return; }
     if (files.length >= CFG.maxFiles || total + f.size > CFG.maxTotal) { var m = fill(t('tooMany')); if (errs.indexOf(m) < 0) errs.push(m); return; }
     var same = files.some(function (g) { return g.name === f.name && g.size === f.size && g.lastModified === f.lastModified; });
@@ -952,7 +954,7 @@ if (DEMO && location.hash === '#selftest') (async function () {
   out.push('draft=' + draftOk);
   // Picked files come back after a reload; removing one removes it from storage too.
   reset(); await dropAllFiles();
-  addFiles([new File([new Uint8Array(1000)], 'a.jpg', { type: 'image/jpeg' }), new File([new Uint8Array(2000)], 'b.pdf', { type: 'application/pdf' })]);
+  addFiles([new File([new Uint8Array(1000)], 'a.jpg', { type: 'image/jpeg' }), new File([new Uint8Array(2000)], 'b.png', { type: 'image/png' })]);
   await idbQueue;
   files = []; fileIds = [];
   var kept = await restoreFiles();
@@ -964,7 +966,7 @@ if (DEMO && location.hash === '#selftest') (async function () {
   reset(); await dropAllFiles();
   function mk(n, size, type) { return new File([new Uint8Array(size)], n, { type: type, lastModified: 1700000000000 + size }); }
   a.path = 'fix'; step = 2; render();
-  addFiles([mk('racun.jpg', 1500, 'image/jpeg'), mk('posnetek.mp4', 300000, 'video/mp4'), mk('cenik.pdf', 2500, 'application/pdf')]);
+  addFiles([mk('racun.jpg', 1500, 'image/jpeg'), mk('posnetek.mp4', 300000, 'video/mp4'), mk('cenik.png', 2500, 'image/png')]);
   go(-1); go(1);                                                           // back to "what do you need", forward again
   var listed = document.querySelectorAll('#flist li').length === 3;
   document.getElementById('voice').accept === 'audio/*' && addFiles([mk('glas.m4a', 4000, 'audio/mp4')]);   // voice message
@@ -975,10 +977,10 @@ if (DEMO && location.hash === '#selftest') (async function () {
   var inMemory = files.map(function (f) { return f.name; }).join(',');
   files = []; fileIds = []; await restoreFiles();                          // reload
   var afterReload = files.map(function (f) { return f.name; }).join(',');
-  addFiles([mk('cenik.pdf', 2500, 'application/pdf')]);                    // re-picked after the reload: still no duplicate
+  addFiles([mk('cenik.png', 2500, 'image/png')]);                    // re-picked after the reload: still no duplicate
   step = 1; render(); a.path = 'idea'; go(1);                              // switch to the idea path
   var onIdea = document.querySelectorAll('#flist li, #vlist li').length;
-  var want = 'racun.jpg,posnetek.mp4,cenik.pdf,glas.m4a,skladisce.png,linija.mov';
+  var want = 'racun.jpg,posnetek.mp4,cenik.png,glas.m4a,skladisce.png,linija.mov';
   out.push('mixed=' + (listed && inMemory === want && afterReload === want && files.length === 6 && onIdea === 6));
   // ... and all six upload after Send, each complete, storage empty afterwards.
   a.ideaWhat = 'x'; a.name = 'Mix'; a.contact = 'mix@example.com'; a.privacy = true; demoLog.chunks = []; render();
@@ -1019,6 +1021,12 @@ if (DEMO && location.hash === '#selftest') (async function () {
   navigator.mediaDevices.getUserMedia = gum;
   var fb = document.querySelector('#recerr .warn').textContent;
   out.push('voiceFallback=' + (!recState && fb.indexOf(t('recType')) >= 0 && !/Settings|Nastavitve|Allow|Dovoli/.test(fb)));
+  // Only photos, video and voice: documents and programs are refused the moment they're picked (even if they claim to be a photo).
+  var nBefore = files.length;
+  addFiles([mk('cenik.pdf', 2500, 'application/pdf'), mk('setup.exe', 2600, 'image/jpeg'), mk('tabela.xlsx', 2700, ''), mk('slika.svg', 2800, 'image/svg+xml')]);
+  var nMid = files.length;
+  addFiles([mk('foto.heic', 2900, 'image/heic'), mk('IMG_1.mov', 3000, 'video/quicktime')]);
+  out.push('onlyMedia=' + (nMid === nBefore && files.length === nBefore + 2));
   // The page reloads mid-upload: on start it uploads the remaining file by itself and cleans up.
   await dropAllFiles(); keepFile('r1', mk('ostanek.jpg', 3000, 'image/jpeg')); await idbQueue;   // one file still waiting
   reqId = '261006-DEMO'; a.name = 'Test'; setPending(true);
