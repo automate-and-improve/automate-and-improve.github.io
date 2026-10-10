@@ -543,6 +543,7 @@ function render() {
   if (state === 'done') return renderDone();
   if (state !== 'form') return renderFiles();
   var f = flow(), name = f[step], card = document.getElementById('card');
+  count(step ? STEP_NO[name] + '-' + name : '0-open');
   var h = '<div class="prog"><i style="width:' + Math.round(step / f.length * 100) + '%"></i></div><div class="fade">';
   if (restored && step > 0) h += '<div class="note"><span aria-hidden="true">↩️</span><span>' + esc(t('restored')) + '</span></div>';
   if (step > 0) h += '<div class="stepn">' + t('step') + ' ' + step + ' ' + t('of') + ' ' + (f.length - 1) + '</div>';
@@ -640,6 +641,23 @@ function server(fn) {
     r[fn].apply(r, args);
   });
 }
+// ---------- page counts: how far a visit gets and what fails (Visits tab; no IP, no answers, nothing kept on the device) ----------
+var VISIT = Math.random().toString(36).slice(2, 12), counted = {};
+var NOTRACK = DEMO || !!navigator.webdriver;   // our own test robots (release check, device lab) are not visitors
+try {  // the owner opens the link once with ?notrack, and this browser is never counted again
+  if (/[?&]notrack\b/.test(location.search)) localStorage.setItem('intake-notrack', '1');
+  if (localStorage.getItem('intake-notrack')) NOTRACK = true;
+} catch (e) {}
+var STEP_NO = { path: 1, problem: 2, idea: 2, time: 3, value: 4, about: 5 };
+function count(ev, note) {
+  if (NOTRACK || counted[ev]) return;
+  counted[ev] = true;
+  var ua = navigator.userAgent, dev = (/iPhone|iPad/.test(ua) ? 'iPhone' : /Android/.test(ua) ? 'Android' : /Windows/.test(ua) ? 'Windows' :
+    /Mac/.test(ua) ? 'Mac' : 'other') + (/FBAN|FBAV|Instagram|WhatsApp|; wv\)/.test(ua) ? ' in-app' : '');
+  try { server('track', ev, VISIT, lang, dev, String(note || '').slice(0, 150)).catch(function () {}); } catch (e) {}  // never bothers the visitor
+}
+window.addEventListener('error', function (e) { count('x-js', e.message); });
+window.addEventListener('unhandledrejection', function (e) { count('x-js', msgOf(e.reason)); });
 function payload() {
   var p = {}, keepFix = a.path !== 'idea';
   ['name', 'contact', 'business', 'industry', 'employees', 'country', 'referrer', 'path', 'hp_extra'].forEach(function (k) { p[k] = a[k] || ''; });
@@ -683,9 +701,11 @@ async function send() {
   render();
   try {
     var r = await retry(function () { return server('submit', payload()); });
+    count('6-sent');
     reqId = r.id; confirmedTo = r.confirmed ? (a.contact || '').trim() : ''; clearDraft();
     if (files.length) setPending(true);   // if the page reloads mid-upload, it carries on by itself
   } catch (e) {
+    count('x-send', msgOf(e));
     err = /LIMIT/.test(msgOf(e)) ? t('limit') : t('sendFail');
     sending = false; render(); focusHead();
     return;
@@ -868,6 +888,7 @@ async function uploadAll() {
     sentBytes += files[i].size;
   }
   try { if (wakeLock) wakeLock.release(); } catch (e) {}
+  if (failed.length) count('x-files', failed.length + ' of ' + files.length + ' failed'); else if (!cancel) count('7-files');
   finish();
 }
 function finish() { state = 'done'; setPending(false); dropAllFiles(); render(); focusHead(); }
